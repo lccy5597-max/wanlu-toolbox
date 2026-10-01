@@ -1,0 +1,6 @@
+<view class="empty-state {{size === 'compact' ? 'is-compact' : ''}}">
+  <t-icon name="{{icon}}" size="{{size === 'compact' ? '48rpx' : '72rpx'}}" color="{{iconColor}}" />
+  <view class="empty-title">{{title}}</view>
+  <view wx:if="{{desc}}" class="empty-desc">{{desc}}</view>
+  <slot></slot>
+</view>

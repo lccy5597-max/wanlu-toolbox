@@ -1,0 +1,97 @@
+/* 页面骨架：page 定高 + .page 纵向 flex。
+   原来用 calc(100vh - 220rpx) 硬编码减去「导航 + 搜索 + 分类」的高度，
+   iOS / Android 导航栏高度与安全区不同，算不准会导致底部被吃掉，
+   改为 flex 让滚动区自动吃掉剩余高度。 */
+page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* pages/tools/tools.wxss */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  /* 覆盖 common.wxss 全局 .page 的底部安全区内边距：
+     Tab 页下方已有 TabBar，不需要再留出 home 指示条空间 */
+  padding: 0;
+}
+
+.search-bar {
+  padding: 8rpx var(--wl-page-padding) 16rpx;
+  background: var(--wl-bg);
+  flex: none;
+}
+
+.tools-search {
+  display: block;
+}
+
+.search-input {
+  background: var(--wl-surface);
+  border-radius: var(--wl-radius-pill);
+  box-shadow: var(--wl-shadow-card);
+}
+
+.category-bar {
+  white-space: nowrap;
+  padding: 0 var(--wl-page-padding) 16rpx;
+  background: var(--wl-bg);
+  flex: none;
+}
+
+.category-list {
+  display: inline-flex;
+  align-items: center;
+}
+
+.category-item {
+  padding: 12rpx 28rpx;
+  margin-right: 16rpx;
+  border-radius: var(--wl-radius-pill);
+  background: var(--wl-surface);
+  border: 1rpx solid var(--wl-border);
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-sub);
+}
+
+.category-item.is-active {
+  background: var(--wl-primary);
+  border-color: var(--wl-primary);
+  color: var(--wl-text-inverse);
+  font-weight: 500;
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+}
+
+.result-bar {
+  padding: 8rpx var(--wl-page-padding) 16rpx;
+}
+
+.result-text {
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-weak);
+}
+
+.tool-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--wl-page-padding);
+}
+
+.tool-list .list {
+  margin-bottom: var(--wl-card-gap);
+}
+
+.empty-wrap {
+  padding: 0 var(--wl-page-padding);
+}
+
+.footer-space {
+  height: 40rpx;
+}

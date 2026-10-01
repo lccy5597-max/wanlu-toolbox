@@ -1,0 +1,97 @@
+/**
+ * 挽鹿工具箱 设计变量
+ *
+ * 使用方式：所有页面/组件统一使用 var(--wl-*) 变量，
+ * 不允许在业务 WXSS 里再散写颜色、圆角、阴影值。
+ *
+ * 视觉基调：浅色背景、卡片式、统一圆角、轻阴影、弱渐变。
+ */
+
+page {
+  /* 品牌色 */
+  --wl-primary: #2b7a68;
+  --wl-primary-dark: #21604f;
+  --wl-primary-light: #e6f2ee;
+  --wl-primary-weak: #f2f8f6;
+
+  /* 辅助 / 状态色 */
+  --wl-accent: #c8792c;
+  --wl-success: #2f8f5b;
+  --wl-warning: #d98324;
+  --wl-danger: #d4553f;
+
+  /* 中性色 */
+  --wl-bg: #f4f6f8;
+  --wl-surface: #ffffff;
+  --wl-surface-sub: #f7f9fa;
+  --wl-border: #e9eef0;
+  --wl-border-strong: #dde4e7;
+
+  /* 文本 */
+  --wl-text: #1f2729;
+  --wl-text-sub: #5f6d72;
+  --wl-text-weak: #94a0a5;
+  --wl-text-inverse: #ffffff;
+
+  /* 工具图标色调 */
+  --wl-tone-green-bg: #e8f2ea;
+  --wl-tone-mint-bg: #e4f1ee;
+  --wl-tone-sky-bg: #e7f0f8;
+  --wl-tone-indigo-bg: #eaedf9;
+  --wl-tone-violet-bg: #eeecf7;
+  --wl-tone-coral-bg: #f8ece8;
+  --wl-tone-amber-bg: #f9f1e2;
+  --wl-tone-deep-bg: #e6efec;
+
+  /* 圆角 */
+  --wl-radius-xs: 12rpx;
+  --wl-radius-sm: 16rpx;
+  --wl-radius: 24rpx;
+  --wl-radius-lg: 32rpx;
+  --wl-radius-pill: 999rpx;
+
+  /* 间距 */
+  --wl-space-xs: 8rpx;
+  --wl-space-sm: 16rpx;
+  --wl-space: 24rpx;
+  --wl-space-lg: 32rpx;
+  --wl-space-xl: 48rpx;
+
+  /* 字号 */
+  --wl-font-xs: 22rpx;
+  --wl-font-sm: 26rpx;
+  --wl-font: 28rpx;
+  --wl-font-md: 30rpx;
+  --wl-font-lg: 34rpx;
+  --wl-font-xl: 40rpx;
+  --wl-font-xxl: 48rpx;
+
+  /* 阴影 */
+  --wl-shadow-card: 0 6rpx 20rpx rgba(31, 39, 41, 0.05);
+  --wl-shadow-float: 0 10rpx 30rpx rgba(31, 39, 41, 0.08);
+
+  /* 布局 */
+  --wl-page-padding: 24rpx;
+  --wl-card-gap: 20rpx;
+  --wl-safe-bottom: env(safe-area-inset-bottom);
+
+  /* 语义别名：业务代码优先使用这一组更直观的变量名 */
+  --brand-color: var(--wl-primary);
+  --brand-color-dark: var(--wl-primary-dark);
+  --brand-color-light: var(--wl-primary-light);
+  --bg-page: var(--wl-bg);
+  --bg-card: var(--wl-surface);
+  --bg-sub: var(--wl-surface-sub);
+  --text-primary: var(--wl-text);
+  --text-secondary: var(--wl-text-sub);
+  --text-placeholder: var(--wl-text-weak);
+  --border-color: var(--wl-border);
+  --radius-small: var(--wl-radius-xs);
+  --radius-medium: var(--wl-radius-sm);
+  --radius-large: var(--wl-radius);
+  --space-xs: var(--wl-space-xs);
+  --space-sm: var(--wl-space-sm);
+  --space-md: var(--wl-space);
+  --space-lg: var(--wl-space-lg);
+  --shadow-card: var(--wl-shadow-card);
+}

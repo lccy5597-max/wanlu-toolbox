@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "pindou-icon": "/components/pindou-icon/pindou-icon",
+    "t-button": "/miniprogram_npm/tdesign-miniprogram/button/button",
+    "t-icon": "/miniprogram_npm/tdesign-miniprogram/icon/icon",
+    "favorite-action": "/components/favorite-action/favorite-action"
+  }
+}

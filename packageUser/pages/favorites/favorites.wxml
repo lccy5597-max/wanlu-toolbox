@@ -1,0 +1,8 @@
+<view class="shell">
+  <navigation-bar title="我的收藏" back="{{true}}"></navigation-bar>
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}"><view class="content">
+    <view class="page-head"><view><view class="page-title">我的收藏</view><view class="page-desc">收藏仅保存在本机，可随时取消或清空。</view></view><view wx:if="{{items.length}}" class="clear-link" bindtap="onClear">清空</view></view>
+    <view wx:if="{{items.length}}"><view wx:for="{{items}}" wx:key="id" class="data-card card"><view class="tool-main" data-path="{{item.path}}" bindtap="onToolTap"><view class="tool-icon icon-wrap tone-{{item.tone}}"><t-icon name="{{item.icon}}" size="38rpx" color="{{item.iconColor}}" /></view><view class="tool-copy"><view class="tool-name">{{item.name}}</view><view class="tool-desc text-ellipsis">{{item.description}}</view></view><t-icon name="chevron-right" size="28rpx" color="#94a0a5" /></view><view class="card-action" data-id="{{item.id}}" bindtap="onRemove">取消收藏</view></view></view>
+    <empty-state wx:else title="还没有收藏" desc="在工具详情页点击收藏后，会显示在这里。" size="compact" />
+  </view></scroll-view>
+</view>

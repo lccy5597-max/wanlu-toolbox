@@ -1,0 +1,38 @@
+<view
+  wx:if="{{mode === 'grid'}}"
+  class="grid {{pressed ? 'is-pressing' : ''}}"
+  bindtap="onTap"
+  bindtouchstart="onPressStart"
+  bindtouchend="onPressEnd"
+  bindtouchcancel="onPressEnd"
+>
+  <view class="grid-icon icon-wrap tone-{{tool.tone}}">
+    <t-icon name="{{tool.icon}}" size="40rpx" color="{{tool.iconColor}}" />
+  </view>
+  <view class="grid-name text-ellipsis">{{tool.name}}</view>
+  <view class="grid-desc text-clamp-2">{{tool.description}}</view>
+</view>
+
+<view
+  wx:else
+  class="list {{pressed ? 'is-pressing' : ''}}"
+  bindtap="onTap"
+  bindtouchstart="onPressStart"
+  bindtouchend="onPressEnd"
+  bindtouchcancel="onPressEnd"
+>
+  <view class="list-icon icon-wrap tone-{{tool.tone}}">
+    <t-icon name="{{tool.icon}}" size="40rpx" color="{{tool.iconColor}}" />
+  </view>
+  <view class="list-main">
+    <view class="list-head">
+      <text class="list-name text-ellipsis">{{tool.name}}</text>
+      <text wx:if="{{tool.isAi}}" class="badge badge-ai">AI</text>
+      <text wx:if="{{tool.isVip}}" class="badge badge-vip">VIP</text>
+      <text wx:if="{{tool.isHot}}" class="badge badge-hot">热门</text>
+      <text wx:elif="{{tool.isNew}}" class="badge badge-new">新上线</text>
+    </view>
+    <view class="list-desc text-ellipsis">{{tool.description}}</view>
+  </view>
+  <t-icon name="chevron-right" size="28rpx" color="#94a0a5" />
+</view>

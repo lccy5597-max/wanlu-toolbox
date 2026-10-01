@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "t-icon": "/miniprogram_npm/tdesign-miniprogram/icon/icon",
+    "favorite-action": "/components/favorite-action/favorite-action"
+  }
+}

@@ -1,0 +1,31 @@
+/* packageGithub/pages/index/index.wxss */
+.content {
+  padding: 24rpx var(--wl-page-padding);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56rpx 24rpx 48rpx;
+  text-align: center;
+}
+
+.hero-icon {
+  width: 112rpx;
+  height: 112rpx;
+  margin-bottom: 24rpx;
+}
+
+.hero-title {
+  font-size: var(--wl-font-xl);
+  font-weight: 600;
+  color: var(--wl-text);
+}
+
+.hero-desc {
+  margin: 12rpx 0 24rpx;
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-sub);
+  line-height: 1.7;
+}

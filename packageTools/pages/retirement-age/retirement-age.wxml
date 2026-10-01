@@ -1,0 +1,114 @@
+<view class="shell">
+  <navigation-bar title="退休年龄计算器" back="{{true}}" color="#1f2729" background="#f4f6f8"></navigation-bar>
+
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="page">
+      <!-- 功能说明：紧凑说明条，统一样式见 styles/common.wxss -->
+      <view class="tool-hero">
+        <view class="tool-hero-icon">
+          <t-icon name="calendar" size="44rpx" color="#2b7a68" />
+        </view>
+        <view class="tool-hero-copy">
+          <view class="tool-hero-title">查退休年龄与时间</view>
+          <view class="tool-hero-desc">按出生年月推算退休时间。</view>
+        </view>
+        <favorite-action favorite="{{toolFavorite}}" bind:toggle="onToggleToolFavorite" />
+      </view>
+
+      <view class="form-card">
+        <view class="card-title">基础信息</view>
+
+        <view class="field-list">
+          <view class="field-row">
+            <view class="field-icon tone-date">
+              <t-icon name="calendar" size="38rpx" color="#2d6895" />
+            </view>
+            <view class="field-main">
+              <view class="field-label">出生日期</view>
+              <picker class="field-picker" mode="date" value="{{birthDate}}" end="{{todayDate}}" bindchange="onDateChange">
+                <view class="picker-value {{birthDate ? 'has-value' : ''}}">
+                  {{birthDate || '请选择出生日期'}}
+                </view>
+              </picker>
+            </view>
+          </view>
+        </view>
+
+        <view class="type-panel">
+          <view class="type-label">人员类型</view>
+          <view class="type-row">
+            <view
+              wx:for="{{workerTypes}}"
+              wx:key="id"
+              class="type-chip {{workerType === item.id ? 'active' : ''}}"
+              data-type="{{item.id}}"
+              bindtap="onTypeTap"
+            >
+              <view class="type-main">{{item.label}}</view>
+              <view class="type-sub">最高到 {{item.finalAgeText}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="helper-note">
+          女性原 50 岁通常对应普通女工人岗位，女性原 55 岁通常对应管理岗、专业技术岗等；无法确定时，以单位岗位认定和社保经办口径为准。
+        </view>
+
+        <view class="button-row">
+          <t-button class="calculate-button" block shape="round" size="large" theme="primary" bind:tap="onCalculate">
+            计算退休年龄
+          </t-button>
+        </view>
+      </view>
+
+      <view class="result-card">
+        <view class="result-head">
+          <view>
+            <view class="result-label">预计退休年月</view>
+            <view class="result-value">{{result.retireDate}}</view>
+          </view>
+          <view class="result-badge">{{hasResult ? result.retireAgeText : '待计算'}}</view>
+        </view>
+
+        <view class="summary-grid">
+          <view class="summary-item">
+            <view class="summary-label">法定退休年龄</view>
+            <view class="summary-value">{{result.retireAgeText}}</view>
+          </view>
+          <view class="summary-item">
+            <view class="summary-label">延迟月份</view>
+            <view class="summary-value">{{result.delayText}}</view>
+          </view>
+          <view class="summary-item">
+            <view class="summary-label">原退休年月</view>
+            <view class="summary-value">{{result.oldRetireDate}}</view>
+          </view>
+          <view class="summary-item">
+            <view class="summary-label">人员类型</view>
+            <view class="summary-value">{{result.workerTypeText}}</view>
+          </view>
+          <view class="summary-item">
+            <view class="summary-label">弹性延迟最晚</view>
+            <view class="summary-value">{{result.flexibleAgeText}}</view>
+          </view>
+          <view class="summary-item">
+            <view class="summary-label">最晚参考年月</view>
+            <view class="summary-value">{{result.flexibleDate}}</view>
+          </view>
+        </view>
+
+        <view wx:if="{{hasResult}}" class="detail-card">
+          <view class="detail-note">{{result.ruleText}}</view>
+          <view class="detail-note">弹性延迟是达到法定退休年龄后，经个人自愿、单位同意继续延迟办理，最长一般不超过 3 年；这里仅作最晚参考。</view>
+          <view class="detail-note">{{result.summary}}</view>
+        </view>
+
+        <view wx:else class="result-empty">
+          选择出生日期和人员类型后，这里会显示预计退休年月、法定退休年龄和延迟月份。
+        </view>
+
+        <view wx:if="{{hasResult}}" class="reset-link" bindtap="onReset">重新计算</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

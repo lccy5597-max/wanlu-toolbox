@@ -1,10 +1,28 @@
-const { getApiBaseUrl } = require('../config/api')
+const moderationConfig = require('../config/moderation')
 
-const MODERATION_PATH = '/file/image/moderation'
-const UPLOAD_FIELD_NAME = 'multipartFile'
-const MAX_CONCURRENCY = 9
-const MODERATION_TIMEOUT = 15000
+const REMOTE_OPTIONS = (moderationConfig && moderationConfig.options) || {}
+const MODERATION_PATH = REMOTE_OPTIONS.path || '/file/image/moderation'
+const UPLOAD_FIELD_NAME = REMOTE_OPTIONS.uploadFieldName || 'multipartFile'
+const MAX_CONCURRENCY = REMOTE_OPTIONS.maxConcurrency || 9
+const MODERATION_TIMEOUT = REMOTE_OPTIONS.timeout || 15000
 const RISK_LEVELS = ['low', 'medium', 'high']
+
+/**
+ * 延迟获取服务端地址
+ *
+ * config/api.js 属于本地私有配置（已被 .gitignore 忽略），
+ * 因此这里必须延迟 require，避免缺失该文件时阻断小程序页面加载。
+ */
+const getApiBaseUrl = () => {
+  try {
+    // eslint-disable-next-line global-require
+    const apiConfig = require('../config/api')
+    return apiConfig.getApiBaseUrl()
+  } catch (error) {
+    console.warn('[image-moderation] 未找到 config/api.js，远程审核不可用', error)
+    throw createServiceError('未配置内容审核服务地址')
+  }
+}
 
 const createModerationError = (code, message) => {
   const error = new Error(message)

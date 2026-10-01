@@ -1,0 +1,9 @@
+<view
+  class="favorite-action {{favorite ? 'is-active' : ''}}"
+  bindtap="onTap"
+  aria-role="button"
+  aria-label="{{favorite ? '取消收藏' : '收藏工具'}}"
+>
+  <text class="favorite-icon">{{favorite ? '★' : '☆'}}</text>
+  <text class="favorite-text">{{favorite ? '已收藏' : '收藏'}}</text>
+</view>

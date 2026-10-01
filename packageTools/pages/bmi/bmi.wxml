@@ -1,0 +1,108 @@
+<view class="shell">
+  <navigation-bar title="BMI 计算" back="{{true}}" color="#1f2729" background="#f4f6f8"></navigation-bar>
+
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="page">
+      <!-- 功能说明：紧凑说明条，统一样式见 styles/common.wxss -->
+      <view class="tool-hero">
+        <view class="tool-hero-icon">
+          <t-icon name="heart" size="44rpx" color="#2b7a68" />
+        </view>
+        <view class="tool-hero-copy">
+          <view class="tool-hero-title">快速评估身体状态</view>
+          <view class="tool-hero-desc">输入身高和体重，按成年人 BMI 参考范围快速评估。</view>
+        </view>
+        <favorite-action favorite="{{toolFavorite}}" bind:toggle="onToggleToolFavorite" />
+      </view>
+
+      <view class="form-card">
+        <view class="card-title">基础数据</view>
+
+        <view class="field-list">
+          <view class="field-row">
+            <view class="field-icon tone-height">
+              <t-icon name="measurement" size="38rpx" color="#2d6895" />
+            </view>
+            <view class="field-main">
+              <view class="field-label">身高</view>
+              <input
+                class="field-input"
+                type="digit"
+                value="{{heightValue}}"
+                placeholder="请输入身高"
+                placeholder-class="input-placeholder"
+                bindinput="onHeightInput"
+              />
+            </view>
+            <view class="field-unit">cm</view>
+          </view>
+
+          <view class="field-row">
+            <view class="field-icon tone-weight">
+              <t-icon name="root-list" size="38rpx" color="#2d6895" />
+            </view>
+            <view class="field-main">
+              <view class="field-label">体重</view>
+              <input
+                class="field-input"
+                type="digit"
+                value="{{weightValue}}"
+                placeholder="请输入体重"
+                placeholder-class="input-placeholder"
+                bindinput="onWeightInput"
+              />
+            </view>
+            <view class="field-unit">kg</view>
+          </view>
+        </view>
+
+        <view class="button-row">
+          <t-button class="calculate-button" block shape="round" size="large" theme="primary" bind:tap="onCalculate">
+            计算 BMI
+          </t-button>
+        </view>
+        <view class="helper-note">本工具采用成年人 BMI 参考范围，儿童和青少年请使用对应年龄段的专业评估标准。</view>
+      </view>
+
+      <view class="result-card result-{{resultTone}}">
+        <view class="result-head">
+          <view>
+            <view class="result-label">你的 BMI</view>
+            <view class="result-value">{{bmiValue}}</view>
+          </view>
+          <view class="result-badge">{{hasResult ? bmiLevel : '待计算'}}</view>
+        </view>
+
+        <view class="gauge">
+          <view class="gauge-track">
+            <view class="gauge-segment segment-low"></view>
+            <view class="gauge-segment segment-normal"></view>
+            <view class="gauge-segment segment-high"></view>
+            <view class="gauge-segment segment-alert"></view>
+            <view wx:if="{{hasResult}}" class="gauge-marker" style="{{markerStyle}}"></view>
+          </view>
+          <view class="gauge-labels">
+            <text>偏瘦</text>
+            <text>正常</text>
+            <text>超重</text>
+            <text>肥胖</text>
+          </view>
+        </view>
+
+        <view wx:if="{{hasResult}}" class="result-detail">
+          <view class="result-desc">{{bmiDesc}}</view>
+          <view class="ideal-card">
+            <view class="ideal-title">成年人健康体重参考</view>
+            <view class="ideal-value">{{idealRange}}</view>
+          </view>
+          <view class="reset-link" bindtap="onReset">重新填写</view>
+        </view>
+
+        <view wx:else class="result-empty">
+          完成填写后，这里会显示成年人 BMI 区间和体重参考。
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+

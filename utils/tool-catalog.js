@@ -1,398 +1,390 @@
-const featuredTools = [
-  {
-    id: 'pindou',
-    title: '拼豆',
-    desc: '图片转 MARD 色号拼豆图纸',
-    icon: 'image',
-    iconColor: '#a85b52',
-    tone: 'coral',
-    category: '图片处理',
-    path: '/pages/pindou/pindou',
-    keywords: ['拼豆', '拼豆图纸', '像素画', '像素图', 'MARD', '迈阿德', '色号', '豆豆图纸', '照片转拼豆'],
-  },
+/**
+ * 工具目录（唯一数据源）
+ *
+ * 首页、工具页、搜索、分类均从此处读取，禁止在页面里重复维护工具清单。
+ *
+ * 字段说明：
+ * id          唯一标识
+ * name        工具名称
+ * description 工具简介
+ * icon        TDesign 图标名
+ * iconColor   图标颜色
+ * tone        卡片色调（决定图标底色，见 styles/theme.wxss）
+ * category    所属分类（见 CATEGORIES）
+ * path        页面路径
+ * keywords    搜索关键词
+ * sort        排序权重，越小越靠前
+ * isHot       是否热门
+ * isNew       是否新上线
+ * isVip       是否需要会员
+ * isAi        是否 AI 能力
+ * enabled     是否启用（false 时不进入工具页列表）
+ */
+
+const TOOL_PAGE_ROOT = '/packageTools/pages'
+
+const CATEGORIES = [
+  { id: 'all', name: '全部' },
+  { id: 'image', name: '图片' },
+  { id: 'text', name: '文本' },
+  { id: 'calc', name: '计算' },
+  { id: 'dev', name: '开发' },
+  { id: 'ai', name: 'AI' },
+  { id: 'pdf', name: 'PDF' },
+  { id: 'other', name: '其他' },
 ]
 
-const hotTools = [
-  {
-    id: 'mortgage',
-    title: '房贷计算器',
-    desc: '最新利率组合贷算力',
-    icon: 'houses',
-    iconColor: '#9a6a19',
-    tone: 'amber',
-    category: '生活计算',
-    path: '/pages/mortgage/mortgage',
-    keywords: ['房贷', '贷款', '利率', '月供', '组合贷'],
-  },
-  {
-    id: 'salary',
-    title: '工资计算器',
-    desc: '税后到手一键估算',
-    icon: 'wallet',
-    iconColor: '#6655a6',
-    tone: 'violet',
-    category: '生活计算',
-    path: '/pages/salary/salary',
-    keywords: ['工资', '薪资', '税后', '个税', '五险一金', '到手工资'],
-  },
-  {
-    id: 'wooden-fish',
-    title: '电子木鱼',
-    desc: '轻触木鱼积攒今日功德',
-    iconImage: '/assets/icons/wooden-fish.png',
-    iconBg: 'wooden-fish',
-    tone: 'amber',
-    category: '生活娱乐',
-    path: '/pages/wooden-fish/wooden-fish',
-    keywords: ['电子木鱼', '木鱼', '功德', '敲木鱼', '解压', '静心', '自动敲击', '生活娱乐'],
-  },
-  {
-    id: 'qrcode',
-    title: '二维码生成',
-    desc: '快速生成各类美化码',
-    icon: 'qrcode',
-    iconColor: '#2f7567',
-    tone: 'mint',
-    category: '图片处理',
-    path: '/pages/qrcode/qrcode',
-    keywords: ['二维码', '生成', '扫码', '美化码', '链接'],
-  },
-  {
-    id: 'long-image',
-    title: '长图拼接',
-    desc: '多张截图合成一张长图',
-    icon: 'image',
-    iconColor: '#4f5fa8',
-    tone: 'indigo',
-    category: '图片处理',
-    path: '/pages/long-image/long-image',
-    keywords: ['长图', '拼接', '截图', '聊天记录', '订单截图', '图片拼接', '长截图'],
-  },
-  {
-    id: 'nine-grid',
-    title: '九宫格切图',
-    desc: '一键切朋友圈九宫格',
-    icon: 'image',
-    iconColor: '#c4622d',
-    tone: 'coral',
-    category: '图片处理',
-    path: '/pages/nine-grid/nine-grid',
-    keywords: ['九宫格', '切图', '朋友圈', '方图', '3x3', '九格图', '图片分割'],
-  },
-]
+const toolPath = (page) => `${TOOL_PAGE_ROOT}/${page}/${page}`
 
-// 更多工具 - 可搜索，不在首页展示
-const moreTools = [
-  {
-    id: 'social-security-card',
-    title: '电子社保卡',
-    desc: '社保查询与医保码',
-    iconImage: '/assets/icons/social-security-card.png',
-    iconBg: 'white',
-    tone: 'red',
-    category: '民生服务',
-    shortLink: '#小程序://电子社保卡/Tm6FppEAraGw4Hg',
-    keywords: ['电子社保卡', '社保', '医保', '医保码', '社保卡', '民生服务'],
-  },
-  {
-    id: 'restaurant',
-    title: '餐饮投资计算器',
-    desc: '开店成本、保本和经营分析',
-    icon: 'shop',
-    iconColor: '#24584d',
-    tone: 'deep',
-    category: '经营计算',
-    path: '/pages/restaurant/restaurant',
-    keywords: ['餐饮', '餐饮开店', '开店', '投资', '建店成本', '盈亏平衡', '经营分析', '保本'],
-  },
+const tools = [
+  // ---------------- 图片 / 视频 ----------------
   {
     id: 'image-compress',
-    title: '图片压缩',
-    desc: '清晰压缩证件照素材',
+    name: '图片压缩',
+    description: '按比例压缩体积，保留清晰度',
     icon: 'file-zip',
-    iconColor: '#4d7b35',
+    iconColor: '#3f7a4b',
     tone: 'green',
-    category: '图片处理',
-    path: '/pages/image-compress/image-compress',
-    keywords: ['图片', '压缩', '证件照', '素材', '体积'],
+    category: 'image',
+    path: toolPath('image-compress'),
+    keywords: ['图片', '压缩', '体积', '瘦身', '证件照', '素材'],
+    sort: 10,
+    isHot: true,
   },
   {
     id: 'image-resize',
-    title: '图片尺寸调整',
-    desc: '裁成指定尺寸，可选 JPG 或 PNG',
+    name: '图片改尺寸',
+    description: '一寸二寸证件照，自由裁切',
     icon: 'frame',
     iconColor: '#2d6895',
     tone: 'sky',
-    category: '图片处理',
-    path: '/pages/image-resize/image-resize',
-    keywords: ['图片尺寸', '证件照', '裁切', '改尺寸', '报名照', '头像', '像素', '一寸照', '二寸照'],
+    category: 'image',
+    path: toolPath('image-resize'),
+    keywords: ['图片尺寸', '证件照', '裁切', '改尺寸', '报名照', '一寸照', '二寸照'],
+    sort: 11,
+    isHot: true,
+  },
+  {
+    id: 'qrcode',
+    name: '二维码生成',
+    description: '文字链接转二维码，可加 logo',
+    icon: 'qrcode',
+    iconColor: '#2f7567',
+    tone: 'mint',
+    category: 'image',
+    path: toolPath('qrcode'),
+    keywords: ['二维码', '生成', '扫码', '链接', '美化码'],
+    sort: 12,
+    isHot: true,
   },
   {
     id: 'image-watermark',
-    title: '图片加水印',
-    desc: '给证件和材料图加用途水印',
+    name: '图片加水印',
+    description: '证件材料图批量加用途水印',
     icon: 'secured',
     iconColor: '#2f7567',
     tone: 'mint',
-    category: '图片处理',
-    path: '/pages/image-watermark/image-watermark',
-    keywords: ['图片水印', '加水印', '证件水印', '办理银行卡', '银行卡专用', '幼儿园入园', '入园专用', '租房专用', '他用无效', '身份证水印', '材料水印'],
+    category: 'image',
+    path: toolPath('image-watermark'),
+    keywords: ['图片水印', '加水印', '证件水印', '他用无效', '身份证水印'],
+    sort: 13,
+    isHot: true,
+  },
+  {
+    id: 'long-image',
+    name: '长图拼接',
+    description: '多张截图合成一张长图',
+    icon: 'image',
+    iconColor: '#4f5fa8',
+    tone: 'indigo',
+    category: 'image',
+    path: toolPath('long-image'),
+    keywords: ['长图', '拼接', '截图', '聊天记录', '订单截图', '长截图'],
+    sort: 14,
+    isHot: true,
+  },
+  {
+    id: 'nine-grid',
+    name: '九宫格切图',
+    description: '一键切朋友圈九宫格',
+    icon: 'image',
+    iconColor: '#c4622d',
+    tone: 'coral',
+    category: 'image',
+    path: toolPath('nine-grid'),
+    keywords: ['九宫格', '切图', '朋友圈', '方图', '3x3', '图片分割'],
+    sort: 15,
+  },
+  {
+    id: 'pindou',
+    name: '拼豆图纸',
+    description: '图片转 MARD 色号拼豆图',
+    icon: 'image',
+    iconColor: '#a85b52',
+    tone: 'coral',
+    category: 'image',
+    path: toolPath('pindou'),
+    keywords: ['拼豆', '图纸', '像素画', '色号', 'MARD', '手工'],
+    sort: 16,
   },
   {
     id: 'video-compress',
-    title: '视频压缩',
-    desc: '本地压缩视频，减小发送体积',
+    name: '视频压缩',
+    description: '本地压缩视频，减小体积',
     icon: 'video',
     iconColor: '#5d67d8',
     tone: 'indigo',
-    category: '视频处理',
-    path: '/pages/video-compress/video-compress',
-    keywords: ['视频', '压缩', '视频压缩', '体积', '发送', '相册', '本地处理'],
+    category: 'image',
+    path: toolPath('video-compress'),
+    keywords: ['视频', '压缩', '视频压缩', '体积', '相册'],
+    sort: 17,
   },
-  {
-    id: 'fitness-assistant',
-    title: '智形健身助手',
-    desc: '健身训练与运动指导',
-    iconImage: '/assets/icons/fitness-assistant.png',
-    iconBg: 'black',
-    tone: 'deep',
-    category: '运动健康',
-    shortLink: '#小程序://智形健身助手/wZ2cM0TcZAp9QcF',
-    keywords: ['智形健身助手', '健身', '训练', '运动', '锻炼', '健身计划', '运动健康'],
-  },
-  {
-    id: 'service-12333',
-    title: '12333',
-    desc: '人社服务查询与办理入口',
-    iconImage: '/assets/icons/service-12333.png',
-    iconBg: 'white',
-    tone: 'red',
-    category: '民生服务',
-    shortLink: '#小程序://12333/FbL4BBX7Mt37teF',
-    keywords: ['12333', '人社', '社保', '养老', '就业', '劳动', '民生服务'],
-  },
-  {
-    id: 'national-service-platform',
-    title: '国家政务服务平台',
-    desc: '政务服务、证照和办事入口',
-    iconImage: '/assets/icons/national-service-platform.png',
-    iconBg: 'white',
-    tone: 'red',
-    category: '民生服务',
-    shortLink: '#小程序://国家政务服务平台/TKudDlu2oipvrYC',
-    keywords: ['国家政务服务平台', '政务', '办事', '证照', '社保', '医保', '公积金', '民生服务'],
-  },
+
+  // ---------------- 计算 ----------------
   {
     id: 'converter',
-    title: '单位换算',
-    desc: '长度面积重量快捷换',
+    name: '单位换算',
+    description: '长度面积重量快捷换算',
     icon: 'measurement',
     iconColor: '#a85b52',
     tone: 'coral',
-    category: '日常计算',
-    path: '/pages/converter/converter',
+    category: 'calc',
+    path: toolPath('converter'),
     keywords: ['单位', '换算', '长度', '面积', '重量', '体积', '温度'],
-  },
-  {
-    id: 'ruler',
-    title: '校准尺子',
-    desc: '用卡片校准屏幕刻度，测量更可靠',
-    icon: 'measurement',
-    iconColor: '#2d7467',
-    tone: 'mint',
-    category: '日常计算',
-    path: '/pages/ruler/ruler',
-    keywords: ['尺子', '测量', '长度', '厘米', '毫米', '屏幕尺子', '校准尺子', '银行卡', '身份证'],
-  },
-  {
-    id: 'price-compare',
-    title: '比价计算器',
-    desc: '按规格算单价，快速看哪个更划算',
-    icon: 'discount',
-    iconColor: '#b66f18',
-    tone: 'amber',
-    category: '生活计算',
-    path: '/pages/price-compare/price-compare',
-    keywords: ['比价', '单价', '哪个便宜', '哪个划算', '购物', '克价', '斤价', '毫升价', '价格比较'],
-  },
-  {
-    id: 'retirement-pension',
-    title: '养老金估算器',
-    desc: '估算退休后每月养老金',
-    icon: 'wallet',
-    iconColor: '#3f7a4b',
-    tone: 'green',
-    category: '生活计算',
-    path: '/pages/retirement-pension/retirement-pension',
-    keywords: ['退休', '养老金', '退休工资', '退休金', '养老保险', '养老金估算器', '退休工资计算器', '社保退休', '计发月数'],
-  },
-  {
-    id: 'retirement-age',
-    title: '退休年龄计算器',
-    desc: '按出生日期估算退休年月',
-    icon: 'calendar',
-    iconColor: '#2d6895',
-    tone: 'sky',
-    category: '生活计算',
-    path: '/pages/retirement-age/retirement-age',
-    keywords: ['退休年龄', '延迟退休', '退休时间', '退休年月', '法定退休年龄', '出生年月', '退休计算', '养老金'],
+    sort: 20,
+    isHot: true,
   },
   {
     id: 'date-diff',
-    title: '日期间隔计算器',
-    desc: '算相差天数，也能推算前后日期',
+    name: '日期计算',
+    description: '算间隔天数，推算前后日期',
     icon: 'calendar',
     iconColor: '#2d6895',
     tone: 'sky',
-    category: '生活计算',
-    path: '/pages/date-diff/date-diff',
-    keywords: ['日期', '间隔', '天数', '相差几天', '倒计时', '纪念日', '前后日期', '工作日', '日期计算'],
+    category: 'calc',
+    path: toolPath('date-diff'),
+    keywords: ['日期', '间隔', '天数', '相差几天', '倒计时', '纪念日', '工作日'],
+    sort: 21,
+    isHot: true,
   },
   {
-    id: 'bmi',
-    title: 'BMI 计算',
-    desc: '科学评估身体健康指标',
-    icon: 'heart',
-    iconColor: '#2d6895',
-    tone: 'sky',
-    category: '运动健康',
-    path: '/pages/bmi/bmi',
-    keywords: ['bmi', '体重', '身高', '健康', '指数'],
+    id: 'mortgage',
+    name: '房贷计算器',
+    description: '组合贷月供与还款明细',
+    icon: 'houses',
+    iconColor: '#9a6a19',
+    tone: 'amber',
+    category: 'calc',
+    path: toolPath('mortgage'),
+    keywords: ['房贷', '贷款', '利率', '月供', '组合贷', '提前还款'],
+    sort: 22,
+    isHot: true,
   },
   {
-    id: 'bmr',
-    title: '基础代谢率',
-    desc: '了解身体每日基础消耗',
-    icon: 'activity',
-    iconColor: '#c4622d',
-    tone: 'coral',
-    category: '运动健康',
-    path: '/pages/bmr/bmr',
-    keywords: ['bmr', '基础代谢', '代谢率', '热量', '卡路里', '每日消耗'],
+    id: 'salary',
+    name: '工资计算器',
+    description: '税后到手一键估算',
+    icon: 'wallet',
+    iconColor: '#6655a6',
+    tone: 'violet',
+    category: 'calc',
+    path: toolPath('salary'),
+    keywords: ['工资', '薪资', '税后', '个税', '五险一金', '到手工资'],
+    sort: 23,
+    isHot: true,
   },
   {
-    id: 'relationship',
-    title: '亲戚关系计算器',
-    desc: '快速算出称呼，姑舅姨表不再卡壳',
-    icon: 'usergroup',
-    iconColor: '#8b5a4a',
-    tone: 'coral',
-    category: '生活计算',
-    path: '/pages/relationship/relationship',
-    keywords: ['亲戚', '称呼', '关系', '家庭', '家族', '姑妈', '舅舅', '姨妈', '表哥', '堂姐'],
+    id: 'price-compare',
+    name: '比价计算器',
+    description: '按规格算单价，一眼看划算',
+    icon: 'discount',
+    iconColor: '#b66f18',
+    tone: 'amber',
+    category: 'calc',
+    path: toolPath('price-compare'),
+    keywords: ['比价', '价格', '单价', '哪个便宜', '购物', '克价', '毫升价'],
+    sort: 24,
   },
   {
     id: 'compound',
-    title: '复利 / 定投计算器',
-    desc: '估算长期复利增长和每月定投结果',
+    name: '复利定投',
+    description: '估算长期复利增长曲线',
     icon: 'saving-pot',
     iconColor: '#3f7a4b',
     tone: 'green',
-    category: '理财计算',
-    path: '/pages/compound/compound',
-    keywords: ['复利', '定投', '理财', '投资', '基金', '本金', '收益率', '年化', '长期投资'],
+    category: 'calc',
+    path: toolPath('compound'),
+    keywords: ['复利', '定投', '理财', '投资', '基金', '年化'],
+    sort: 25,
   },
   {
-    id: 'zodiac',
-    title: '星座计算器',
-    desc: '输入生日快速查询十二星座',
-    icon: 'star-filled',
-    iconColor: '#f0c36b',
-    tone: 'indigo',
-    category: '生活娱乐',
-    path: '/pages/zodiac/zodiac',
-    keywords: ['星座', '生日', '十二星座', '白羊座', '金牛座', '双子座', '巨蟹座', '狮子座', '处女座', '天秤座', '天蝎座', '射手座', '摩羯座', '水瓶座', '双鱼座'],
+    id: 'retirement-pension',
+    name: '养老金估算',
+    description: '估算退休后每月养老金',
+    icon: 'wallet',
+    iconColor: '#3f7a4b',
+    tone: 'green',
+    category: 'calc',
+    path: toolPath('retirement-pension'),
+    keywords: ['退休', '养老金', '退休金', '养老保险', '计发月数'],
+    sort: 26,
   },
   {
-    id: 'choice-helper',
-    title: '选择困难助手',
-    desc: '模板优先帮你做决定',
-    icon: 'app',
-    iconColor: '#c4662d',
-    tone: 'coral',
-    category: '生活娱乐',
-    path: '/pages/choice-helper/choice-helper',
-    keywords: ['选择困难', '随机决定', '今天吃什么', '喝什么', '周末做什么', '谁来做', '随机选择'],
-  },
-  {
-    id: 'sky-stardust',
-    title: 'Sky星尘',
-    desc: '光遇游戏攻略工具',
-    iconImage: '/assets/icons/sky-stardust.png',
-    tone: 'indigo',
-    shortLink: '#小程序://Sky星尘/XHNcq07v6tucvth',
-    category: '游戏工具',
-    keywords: ['Sky星尘', '光遇', '攻略', '游戏工具', 'Sky', '星尘'],
+    id: 'retirement-age',
+    name: '退休年龄',
+    description: '按出生日期推算退休年月',
+    icon: 'calendar',
+    iconColor: '#2d6895',
+    tone: 'sky',
+    category: 'calc',
+    path: toolPath('retirement-age'),
+    keywords: ['退休年龄', '延迟退休', '法定退休', '退休时间'],
+    sort: 27,
   },
   {
     id: 'shelf-life',
-    title: '商品保质期计算器',
-    desc: '快速算出到期日和剩余天数',
+    name: '保质期计算',
+    description: '算到期日和剩余天数',
     icon: 'calendar',
     iconColor: '#b67f2e',
     tone: 'amber',
-    category: '生活计算',
-    path: '/pages/shelf-life/shelf-life',
-    keywords: ['保质期', '到期', '过期', '商品', '食品', '生产日期', '有效期', '保鲜'],
+    category: 'calc',
+    path: toolPath('shelf-life'),
+    keywords: ['保质期', '到期', '过期', '生产日期', '有效期'],
+    sort: 28,
   },
   {
-    id: 'poker-ledger',
-    title: '打牌记账',
-    desc: '本地记输赢，自动结算谁付谁',
-    icon: 'money',
-    iconColor: '#6655a6',
-    tone: 'violet',
-    category: '棋牌工具',
-    path: '/pages/poker-ledger/poker-ledger',
-    keywords: ['打牌', '麻将', '扑克', '记账', '牌局', '结算', '输赢', '谁付谁'],
+    id: 'relationship',
+    name: '亲戚称呼',
+    description: '姑舅姨表不再叫错',
+    icon: 'usergroup',
+    iconColor: '#8b5a4a',
+    tone: 'coral',
+    category: 'calc',
+    path: toolPath('relationship'),
+    keywords: ['亲戚', '称呼', '关系', '姑妈', '舅舅', '姨妈', '表哥'],
+    sort: 29,
   },
-]
+  {
+    id: 'bmi',
+    name: 'BMI 计算',
+    description: '科学评估身体健康指标',
+    icon: 'heart',
+    iconColor: '#2d6895',
+    tone: 'sky',
+    category: 'calc',
+    path: toolPath('bmi'),
+    keywords: ['bmi', '体重', '身高', '健康', '指数'],
+    sort: 30,
+  },
+  {
+    id: 'bmr',
+    name: '基础代谢率',
+    description: '了解每日基础热量消耗',
+    icon: 'activity',
+    iconColor: '#c4622d',
+    tone: 'coral',
+    category: 'calc',
+    path: toolPath('bmr'),
+    keywords: ['bmr', '基础代谢', '代谢率', '热量', '卡路里'],
+    sort: 31,
+  },
+  {
+    id: 'restaurant',
+    name: '开店测算',
+    description: '建店成本、保本与经营分析',
+    icon: 'shop',
+    iconColor: '#24584d',
+    tone: 'deep',
+    category: 'calc',
+    path: toolPath('restaurant'),
+    keywords: ['餐饮', '开店', '投资', '盈亏平衡', '经营分析', '保本'],
+    sort: 32,
+  },
 
-const topicCards = [
+  // ---------------- 其他 ----------------
+  {
+    id: 'ruler',
+    name: '屏幕尺子',
+    description: '用卡片校准后测量长度',
+    icon: 'measurement',
+    iconColor: '#2d7467',
+    tone: 'mint',
+    category: 'other',
+    path: toolPath('ruler'),
+    keywords: ['尺子', '测量', '长度', '厘米', '毫米', '校准'],
+    sort: 40,
+  },
+  {
+    id: 'choice-helper',
+    name: '选择困难助手',
+    description: '今天吃什么帮你决定',
+    icon: 'app',
+    iconColor: '#c4662d',
+    tone: 'coral',
+    category: 'other',
+    path: toolPath('choice-helper'),
+    keywords: ['选择困难', '随机决定', '今天吃什么', '抽签'],
+    sort: 42,
+  },
   {
     id: 'guide',
-    label: '新手必读',
-    title: '小白工具箱使用指南',
-    desc: '快速了解搜索、热门工具和高频能力的使用方式',
+    name: '使用指南',
+    description: '快速了解工具箱怎么用',
     icon: 'book-open',
     iconColor: '#24584d',
-    button: '查看指南',
     tone: 'deep',
-    pressKey: 'topic-guide',
-    category: '使用指南',
-    path: '/pages/guide/guide',
+    category: 'other',
+    path: toolPath('guide'),
     keywords: ['指南', '教程', '使用', '帮助', '新手'],
+    sort: 44,
   },
 ]
 
-const toolCatalog = [
-  ...featuredTools.map((item) => ({
-    ...item,
-    type: 'tool',
-    actionText: '打开工具',
-  })),
-  ...hotTools.map((item) => ({
-    ...item,
-    type: 'tool',
-    actionText: item.shortLink ? '跳转小程序' : '打开工具',
-  })),
-  ...moreTools.map((item) => ({
-    ...item,
-    type: 'tool',
-    actionText: item.shortLink ? '跳转小程序' : '打开工具',
-  })),
-  ...topicCards.map((item) => ({
-    ...item,
-    type: 'topic',
-    actionText: '查看专题',
-  })),
+// 首页第一屏固定的 7 个高频工具 + 「更多工具」入口（第 8 个由页面补位）
+const QUICK_TOOL_IDS = [
+  'image-compress',
+  'image-resize',
+  'qrcode',
+  'converter',
+  'date-diff',
+  'image-watermark',
+  'long-image',
 ]
 
-const normalize = (value) => String(value || '').trim().toLowerCase()
+const normalize = (value) => String(value == null ? '' : value).trim().toLowerCase()
+
+const bySort = (a, b) => (a.sort || 999) - (b.sort || 999)
+
+const decorate = (item) => ({
+  isHot: false,
+  isNew: false,
+  isVip: false,
+  isAi: false,
+  enabled: true,
+  ...item,
+})
+
+const TOOL_LIST = tools.map(decorate)
+
+const TOOL_MAP = TOOL_LIST.reduce((acc, item) => {
+  acc[item.id] = item
+  return acc
+}, {})
+
+const getCategories = () => {
+  const activeCategoryIds = new Set(
+    TOOL_LIST.filter((item) => item.enabled !== false).map((item) => item.category),
+  )
+
+  return CATEGORIES
+    .filter((item) => item.id === 'all' || activeCategoryIds.has(item.id))
+    .map((item) => ({ ...item }))
+}
 
 const getSearchText = (item) => [
-  item.title,
-  item.desc,
+  item.name,
+  item.description,
   item.category,
   ...(item.keywords || []),
 ].join(' ').toLowerCase()
@@ -400,18 +392,54 @@ const getSearchText = (item) => [
 const searchTools = (keyword) => {
   const query = normalize(keyword)
 
-  if (!query) {
-    return toolCatalog
-  }
+  return TOOL_LIST.filter((item) => item.enabled !== false)
+    .filter((item) => !query || getSearchText(item).includes(query))
+    .sort(bySort)
+}
 
-  return toolCatalog.filter((item) => getSearchText(item).includes(query))
+const getToolsByCategory = (categoryId, keyword) => {
+  const query = normalize(keyword)
+
+  return TOOL_LIST.filter((item) => item.enabled !== false)
+    .filter((item) => !categoryId || categoryId === 'all' || item.category === categoryId)
+    .filter((item) => !query || getSearchText(item).includes(query))
+    .sort(bySort)
+}
+
+const getHotTools = (limit) => {
+  const list = TOOL_LIST.filter((item) => item.enabled !== false && item.isHot).sort(bySort)
+
+  return limit > 0 ? list.slice(0, limit) : list
+}
+
+const getNewTools = (limit) => {
+  const list = TOOL_LIST.filter((item) => item.enabled !== false && item.isNew).sort(bySort)
+
+  return limit > 0 ? list.slice(0, limit) : list
+}
+
+const getQuickTools = () => QUICK_TOOL_IDS
+  .map((id) => TOOL_MAP[id])
+  .filter((item) => item && item.enabled !== false)
+
+const getToolById = (id) => TOOL_MAP[id] || null
+
+const getCategoryName = (categoryId) => {
+  const matched = CATEGORIES.find((item) => item.id === categoryId)
+
+  return matched ? matched.name : '其他'
 }
 
 module.exports = {
-  featuredTools,
-  hotTools,
-  moreTools,
-  topicCards,
-  toolCatalog,
+  CATEGORIES,
+  QUICK_TOOL_IDS,
+  getCategories,
+  getHotTools,
+  getNewTools,
+  getQuickTools,
+  getToolById,
+  getToolsByCategory,
+  getCategoryName,
   searchTools,
+  tools: TOOL_LIST,
 }

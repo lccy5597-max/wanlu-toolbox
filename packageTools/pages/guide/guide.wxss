@@ -1,0 +1,163 @@
+page {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+  background: var(--bg-page);
+}
+
+.page {
+  min-height: 100%;
+  padding: var(--space-md) var(--wl-page-padding) calc(48rpx + var(--wl-safe-bottom));
+  box-sizing: border-box;
+  background: var(--bg-page);
+}
+.guide-card,
+.guide-icon,
+.notice-row {
+  display: flex;
+}
+
+.intro-card,
+.section-card {
+  margin-top: 24rpx;
+  padding: 30rpx;
+  border-radius: 34rpx;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0 14rpx 32rpx rgba(34, 63, 57, 0.05);
+}
+
+.intro-title,
+.section-title {
+  color: #19251f;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.intro-desc {
+  margin-top: 14rpx;
+  color: #5e716c;
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.guide-list {
+  margin-top: 24rpx;
+}
+
+.guide-card {
+  align-items: flex-start;
+  padding: 28rpx;
+  border-radius: 30rpx;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0 16rpx 38rpx rgba(34, 63, 57, 0.06);
+}
+
+.guide-card + .guide-card {
+  margin-top: 18rpx;
+}
+
+.guide-icon {
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 74rpx;
+  height: 74rpx;
+  border-radius: 22rpx;
+  background: #e6f1ed;
+}
+
+.guide-copy {
+  min-width: 0;
+  flex: 1;
+  margin-left: 22rpx;
+}
+
+.guide-title {
+  color: #19251f;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.guide-desc {
+  margin-top: 8rpx;
+  color: #5e716c;
+  font-size: 25rpx;
+  line-height: 1.55;
+}
+
+.tip-list,
+.notice-list {
+  margin-top: 18rpx;
+}
+
+.tip-row {
+  padding: 20rpx 0;
+}
+
+.tip-row + .tip-row {
+  border-top: 1rpx solid #e4eee9;
+}
+
+.tip-name {
+  color: #24584d;
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.tip-text {
+  margin-top: 8rpx;
+  color: #5e716c;
+  font-size: 24rpx;
+  line-height: 1.5;
+}
+
+.notice-row {
+  align-items: flex-start;
+}
+
+.notice-row + .notice-row {
+  margin-top: 18rpx;
+}
+
+.notice-dot {
+  flex: none;
+  width: 10rpx;
+  height: 10rpx;
+  margin-top: 14rpx;
+  border-radius: 999rpx;
+  background: #24584d;
+}
+
+.notice-text {
+  min-width: 0;
+  flex: 1;
+  margin-left: 16rpx;
+  color: #5e716c;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
+@media (max-width: 360px) {
+  .page {
+    padding-left: 22rpx;
+    padding-right: 22rpx;
+  }
+}
+

@@ -1,4 +1,19 @@
 {
+  "name": "wanlu-toolbox",
+  "description": "挽鹿工具箱 · Wanlu Toolbox",
+  "scripts": {
+    "prune:npm": "node scripts/prune-npm.js",
+    "check": "node scripts/check-project.js",
+    "test:stage3": "node scripts/test-stage3-data.js",
+    "test:stage4:smoke": "node scripts/test-stage4-tools-smoke.js",
+    "test:stage4:search": "node scripts/test-stage4-search.js",
+    "test:stage4:search-integration": "node scripts/test-stage4-search-integration.js",
+    "test:stage4:discovery": "node scripts/test-stage4-discovery.js",
+    "test:stage4:discover-integration": "node scripts/test-stage4-discover-integration.js",
+    "test:stage4:interaction": "node scripts/test-stage4-interaction.js",
+    "test:stage4:static": "node scripts/test-stage4-static-check.js",
+    "test:stage4": "node scripts/test-stage4-tools.js && node scripts/test-stage4-search.js && node scripts/test-stage4-search-integration.js && node scripts/test-stage4-discovery.js && node scripts/test-stage4-discover-integration.js && node scripts/test-stage4-interaction.js"
+  },
   "dependencies": {
     "tdesign-miniprogram": "^1.13.2"
   }

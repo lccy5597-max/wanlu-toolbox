@@ -1,0 +1,269 @@
+page {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+  background: var(--bg-page);
+}
+
+.page {
+  min-height: 100%;
+  padding: var(--space-md) var(--wl-page-padding) calc(48rpx + var(--wl-safe-bottom));
+  box-sizing: border-box;
+  background: var(--bg-page);
+}
+.field-row,
+.field-icon,
+.button-row,
+.result-head,
+.summary-grid,
+.offset-control,
+.direction-selector {
+  display: flex;
+}
+
+.form-card,
+.result-card {
+  margin-top: 24rpx;
+  padding: 30rpx;
+  border-radius: 34rpx;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0 14rpx 32rpx rgba(42, 69, 84, 0.05);
+}
+
+.card-title {
+  color: #14242a;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.field-list {
+  margin-top: 24rpx;
+}
+
+.field-row {
+  align-items: center;
+  min-height: 122rpx;
+  padding: 22rpx;
+  border-radius: 28rpx;
+  box-sizing: border-box;
+  background: #f6fbff;
+}
+
+.field-row + .field-row {
+  margin-top: 18rpx;
+}
+
+.field-icon {
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 74rpx;
+  height: 74rpx;
+  border-radius: 20rpx;
+}
+
+.tone-start,
+.tone-end,
+.tone-days {
+  background: var(--brand-color-light);
+}
+
+.field-main {
+  min-width: 0;
+  flex: 1;
+  margin-left: 22rpx;
+}
+
+.field-label,
+.result-label,
+.summary-label {
+  color: #768992;
+  font-size: 23rpx;
+}
+
+.field-input,
+.picker-value {
+  width: 100%;
+  min-height: 52rpx;
+  margin-top: 8rpx;
+  color: #14242a;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 52rpx;
+}
+
+.field-picker {
+  display: block;
+}
+
+.picker-value {
+  color: #a7b5bc;
+}
+
+.picker-value.has-value {
+  color: #14242a;
+}
+
+.input-placeholder {
+  color: #a7b5bc;
+  font-weight: 500;
+}
+
+.offset-main {
+  min-width: 0;
+}
+
+.offset-control {
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.offset-input {
+  flex: 1;
+  min-width: 0;
+  margin-top: 0;
+}
+
+.direction-selector {
+  flex: none;
+  width: 184rpx;
+  padding: 6rpx;
+  border-radius: 999rpx;
+  background: var(--brand-color-light);
+}
+
+.direction-chip {
+  flex: 1;
+  height: 54rpx;
+  border-radius: 999rpx;
+  color: #638293;
+  font-size: 22rpx;
+  font-weight: 700;
+  line-height: 54rpx;
+  text-align: center;
+}
+
+.direction-chip.active {
+  color: #ffffff;
+  background: var(--brand-color);
+  box-shadow: 0 10rpx 20rpx rgba(43, 122, 104, 0.16);
+}
+
+.button-row {
+  margin-top: 24rpx;
+}
+
+.calculate-button {
+  --td-button-primary-bg-color: var(--brand-color);
+  --td-button-primary-border-color: var(--brand-color);
+  --td-button-primary-active-bg-color: var(--brand-color-dark);
+  --td-button-primary-active-border-color: var(--brand-color-dark);
+}
+
+.result-head {
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.result-value {
+  margin-top: 8rpx;
+  color: #14242a;
+  font-size: 56rpx;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.result-badge {
+  max-width: 260rpx;
+  min-height: 48rpx;
+  padding: 0 20rpx;
+  border-radius: 999rpx;
+  background: var(--brand-color-light);
+  color: var(--brand-color);
+  font-size: 23rpx;
+  font-weight: 700;
+  line-height: 48rpx;
+  text-align: center;
+}
+
+.summary-grid {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 28rpx;
+}
+
+.summary-item {
+  width: calc(50% - 9rpx);
+  margin-bottom: 18rpx;
+  padding: 24rpx;
+  border-radius: 26rpx;
+  box-sizing: border-box;
+  background: #f6fbff;
+}
+
+.summary-value {
+  margin-top: 10rpx;
+  color: #14242a;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.detail-card {
+  margin-top: 4rpx;
+  padding: 24rpx;
+  border-radius: 26rpx;
+  background: #f6fbff;
+}
+
+.detail-note {
+  color: #60727b;
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.result-empty {
+  margin-top: 10rpx;
+  color: #768992;
+  font-size: 25rpx;
+  line-height: 1.5;
+}
+
+.reset-link {
+  margin-top: 24rpx;
+  color: var(--brand-color);
+  font-size: 26rpx;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 360px) {
+  .page {
+    padding-left: 22rpx;
+    padding-right: 22rpx;
+  }
+
+  .result-value {
+    font-size: 50rpx;
+  }
+
+  .summary-item {
+    width: 100%;
+  }
+}

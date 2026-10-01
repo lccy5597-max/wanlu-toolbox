@@ -43,3 +43,6 @@ config/api.js
 # Vim
 *.swp
 *.swo
+
+# 微信开发者工具个人配置（含真实 AppID，禁止入库）
+project.private.config.json

@@ -1,0 +1,126 @@
+/* pages/mine/mine.wxss */
+page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+}
+
+.brand-card {
+  display: flex;
+  align-items: center;
+  margin: 8rpx var(--wl-page-padding) 0;
+  padding: var(--wl-space-lg) var(--wl-space);
+}
+
+.brand-mark {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88rpx;
+  height: 88rpx;
+  margin-right: var(--wl-space);
+  border-radius: var(--wl-radius-lg);
+  background: var(--wl-primary-light);
+  color: var(--wl-primary-dark);
+  font-size: var(--wl-font-xl);
+  font-weight: 600;
+}
+
+.brand-copy,
+.entry-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.brand-name {
+  color: var(--wl-text);
+  font-size: var(--wl-font-lg);
+  font-weight: 600;
+}
+
+.brand-desc,
+.entry-desc {
+  margin-top: 6rpx;
+  color: var(--wl-text-weak);
+  font-size: var(--wl-font-sm);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+  margin: var(--wl-card-gap) var(--wl-page-padding) 0;
+}
+
+.summary-item { padding: 24rpx 8rpx; text-align: center; }
+.summary-value { color: var(--wl-primary-dark); font-size: 36rpx; font-weight: 600; }
+.summary-label { margin-top: 6rpx; color: var(--wl-text-weak); font-size: var(--wl-font-xs); }
+.section-label { margin: 32rpx var(--wl-page-padding) 12rpx; color: var(--wl-text-weak); font-size: var(--wl-font-xs); }
+
+.entry-list,
+.feedback {
+  margin: 0 var(--wl-page-padding);
+}
+
+.entry,
+.feedback-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 26rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.entry:not(.is-last) {
+  border-bottom: 1rpx solid var(--wl-border);
+}
+
+.entry-icon {
+  flex: none;
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: 20rpx;
+}
+
+.entry-title {
+  color: var(--wl-text);
+  font-size: var(--wl-font-md);
+  font-weight: 500;
+}
+
+.feedback-btn {
+  border: none;
+  background: transparent;
+  line-height: normal;
+  text-align: left;
+}
+
+.footer {
+  padding: 56rpx 24rpx calc(40rpx + var(--wl-safe-bottom));
+  text-align: center;
+}
+
+.footer-name {
+  color: var(--wl-text-weak);
+  font-size: var(--wl-font-sm);
+}
+
+.footer-desc {
+  margin-top: 8rpx;
+  color: var(--wl-text-weak);
+  font-size: var(--wl-font-xs);
+}

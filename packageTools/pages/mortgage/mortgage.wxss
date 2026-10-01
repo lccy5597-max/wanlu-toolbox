@@ -1,0 +1,390 @@
+page {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+  background: var(--bg-page);
+}
+
+.page {
+  min-height: 100%;
+  padding: var(--space-md) var(--wl-page-padding) calc(48rpx + var(--wl-safe-bottom));
+  box-sizing: border-box;
+  background: var(--bg-page);
+}
+.segment-control,
+.field-row,
+.down-input-row,
+.quick-down-row,
+.year-input-row,
+.quick-year-row,
+.button-row,
+.result-head,
+.summary-grid,
+.schedule-row {
+  display: flex;
+}
+
+.form-card,
+.result-card {
+  margin-top: 24rpx;
+  padding: 30rpx;
+  border-radius: 34rpx;
+  box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0 14rpx 32rpx rgba(34, 63, 57, 0.05);
+}
+
+.card-title {
+  color: #19251f;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.segment-control {
+  padding: 8rpx;
+  margin-top: 24rpx;
+  border-radius: 999rpx;
+  background: #f1f6f3;
+}
+
+.repay-segment {
+  margin-top: 16rpx;
+}
+
+.segment-item {
+  flex: 1;
+  height: 66rpx;
+  border-radius: 999rpx;
+  color: #73817d;
+  font-size: 25rpx;
+  font-weight: 600;
+  line-height: 66rpx;
+  text-align: center;
+}
+
+.segment-item.is-active {
+  color: #9a6a19;
+  background: #ffffff;
+  box-shadow: 0 10rpx 24rpx rgba(94, 70, 29, 0.08);
+}
+
+.down-input-row {
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.down-input {
+  flex: 1;
+  min-width: 106rpx;
+  margin-top: 0;
+}
+
+.quick-down-row {
+  flex: none;
+  align-items: center;
+}
+
+.quick-down-item {
+  flex: none;
+  min-width: 70rpx;
+  height: 46rpx;
+  padding: 0 14rpx;
+  border: 1rpx solid #e6eee9;
+  border-radius: 999rpx;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #71817c;
+  font-size: 21rpx;
+  font-weight: 700;
+  line-height: 44rpx;
+  text-align: center;
+}
+
+.quick-down-item + .quick-down-item {
+  margin-left: 8rpx;
+}
+
+.quick-down-item.is-active {
+  border-color: rgba(154, 106, 25, 0.32);
+  color: #9a6a19;
+  background: #f7efd9;
+}
+
+.field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16rpx;
+}
+
+.down-payment-inline {
+  flex: none;
+  color: #9a6a19;
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.field-list {
+  margin-top: 24rpx;
+}
+
+.field-row {
+  align-items: center;
+  min-height: 104rpx;
+  padding: 20rpx 22rpx;
+  border-radius: 26rpx;
+  box-sizing: border-box;
+  background: #f5f9f7;
+}
+
+.field-row + .field-row {
+  margin-top: 16rpx;
+}
+
+.quick-year-row {
+  align-items: center;
+  flex: none;
+}
+
+.year-input-row {
+  align-items: center;
+  margin-top: 8rpx;
+}
+
+.quick-year-item {
+  flex: none;
+  min-width: 82rpx;
+  height: 48rpx;
+  padding: 0 16rpx;
+  border: 1rpx solid #e6eee9;
+  border-radius: 999rpx;
+  box-sizing: border-box;
+  color: #71817c;
+  font-size: 22rpx;
+  font-weight: 700;
+  line-height: 46rpx;
+  text-align: center;
+  background: #ffffff;
+}
+
+.quick-year-item + .quick-year-item {
+  margin-left: 10rpx;
+}
+
+.quick-year-item.is-active {
+  border-color: rgba(154, 106, 25, 0.32);
+  color: #9a6a19;
+  background: #f7efd9;
+}
+
+.field-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.field-label {
+  color: #7d8985;
+  font-size: 22rpx;
+}
+
+.field-input {
+  width: 100%;
+  height: 50rpx;
+  margin-top: 7rpx;
+  color: #19251f;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.year-input {
+  flex: 1;
+  min-width: 120rpx;
+  margin-top: 0;
+}
+
+.input-placeholder {
+  color: #a1ada9;
+  font-weight: 500;
+}
+
+.field-unit {
+  flex: none;
+  min-width: 68rpx;
+  color: #7d8985;
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: right;
+}
+
+.button-row {
+  margin-top: 24rpx;
+}
+
+.calculate-button {
+  --td-button-primary-bg-color: var(--brand-color);
+  --td-button-primary-border-color: var(--brand-color);
+  --td-button-primary-active-bg-color: var(--brand-color-dark);
+  --td-button-primary-active-border-color: var(--brand-color-dark);
+}
+
+.result-head {
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.result-label {
+  color: #7d8985;
+  font-size: 23rpx;
+}
+
+.result-value {
+  margin-top: 8rpx;
+  color: #142a25;
+  font-size: 48rpx;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.result-badge {
+  min-width: 104rpx;
+  height: 48rpx;
+  padding: 0 18rpx;
+  border-radius: 999rpx;
+  background: #f7efd9;
+  color: #9a6a19;
+  font-size: 24rpx;
+  font-weight: 700;
+  line-height: 48rpx;
+  text-align: center;
+}
+
+.summary-grid {
+  margin-top: 28rpx;
+}
+
+.summary-item {
+  flex: 1;
+  padding: 24rpx;
+  border-radius: 26rpx;
+  background: #f5f9f7;
+}
+
+.summary-item + .summary-item {
+  margin-left: 18rpx;
+}
+
+.summary-label {
+  color: #7d8985;
+  font-size: 22rpx;
+}
+
+.summary-value {
+  margin-top: 10rpx;
+  color: #19251f;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.decrease-tip {
+  margin-top: 20rpx;
+  padding: 18rpx 22rpx;
+  border-radius: 24rpx;
+  background: #f7efd9;
+  color: #9a6a19;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.schedule-card {
+  margin-top: 22rpx;
+  padding: 22rpx 24rpx;
+  border-radius: 26rpx;
+  background: #f5f9f7;
+}
+
+.schedule-title {
+  color: #19251f;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.schedule-list {
+  margin-top: 8rpx;
+}
+
+.schedule-row {
+  align-items: center;
+  justify-content: space-between;
+  min-height: 88rpx;
+  color: #6f7f7a;
+  font-size: 24rpx;
+}
+
+.schedule-row + .schedule-row {
+  border-top: 1rpx solid #e6eee9;
+}
+
+.schedule-period {
+  flex: none;
+  width: 150rpx;
+}
+
+.schedule-detail {
+  min-width: 0;
+  flex: 1;
+  text-align: right;
+}
+
+.schedule-money {
+  color: #19251f;
+  font-weight: 700;
+}
+
+.schedule-sub {
+  margin-top: 6rpx;
+  color: #8b9793;
+  font-size: 21rpx;
+  line-height: 1.35;
+}
+
+.result-empty {
+  margin-top: 26rpx;
+  color: #7d8985;
+  font-size: 25rpx;
+  line-height: 1.5;
+}
+
+.reset-link {
+  margin-top: 24rpx;
+  color: #9a6a19;
+  font-size: 26rpx;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 360px) {
+  .page {
+    padding-left: 22rpx;
+    padding-right: 22rpx;
+  }
+
+  .result-value {
+    font-size: 42rpx;
+  }
+}
+

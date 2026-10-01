@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "tool-card": "/components/tool-card/tool-card",
+    "section-header": "/components/section-header/section-header",
+    "empty-state": "/components/empty-state/empty-state",
+    "t-icon": "/miniprogram_npm/tdesign-miniprogram/icon/icon"
+  }
+}

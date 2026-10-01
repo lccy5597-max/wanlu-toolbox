@@ -1,55 +1,125 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/search/search",
-    "pages/qrcode/qrcode",
-    "pages/bmi/bmi",
-    "pages/bmr/bmr",
-    "pages/relationship/relationship",
-    "pages/mortgage/mortgage",
-    "pages/salary/salary",
-    "pages/retirement-pension/retirement-pension",
-    "pages/retirement-age/retirement-age",
-    "pages/compound/compound",
-    "pages/zodiac/zodiac",
-    "pages/choice-helper/choice-helper",
-    "pages/wooden-fish/wooden-fish",
-    "pages/shelf-life/shelf-life",
-    "pages/date-diff/date-diff",
-    "pages/poker-ledger/poker-ledger",
-    "pages/converter/converter",
-    "pages/ruler/ruler",
-    "pages/price-compare/price-compare",
-    "pages/image-compress/image-compress",
-    "pages/image-resize/image-resize",
-    "pages/image-watermark/image-watermark",
-    "pages/long-image/long-image",
-    "pages/pindou/pindou",
-    "pages/video-compress/video-compress",
-    "pages/nine-grid/nine-grid",
-    "pages/guide/guide",
-    "pages/restaurant/restaurant"
+    "pages/tools/tools",
+    "pages/discover/discover",
+    "pages/mine/mine"
   ],
+  "subPackages": [
+    {
+      "root": "packageTools",
+      "name": "tools",
+      "pages": [
+        "pages/qrcode/qrcode",
+        "pages/image-compress/image-compress",
+        "pages/image-resize/image-resize",
+        "pages/image-watermark/image-watermark",
+        "pages/long-image/long-image",
+        "pages/nine-grid/nine-grid",
+        "pages/video-compress/video-compress",
+        "pages/converter/converter",
+        "pages/date-diff/date-diff",
+        "pages/mortgage/mortgage",
+        "pages/salary/salary",
+        "pages/retirement-pension/retirement-pension",
+        "pages/retirement-age/retirement-age",
+        "pages/compound/compound",
+        "pages/price-compare/price-compare",
+        "pages/shelf-life/shelf-life",
+        "pages/relationship/relationship",
+        "pages/restaurant/restaurant",
+        "pages/bmi/bmi",
+        "pages/bmr/bmr",
+        "pages/ruler/ruler",
+        "pages/choice-helper/choice-helper",
+        "pages/pindou/pindou",
+        "pages/guide/guide"
+      ]
+    },
+    {
+      "root": "packageAI",
+      "name": "ai",
+      "pages": [
+        "pages/index/index"
+      ]
+    },
+    {
+      "root": "packageGithub",
+      "name": "github",
+      "pages": [
+        "pages/index/index"
+      ]
+    },
+    {
+      "root": "packageUser",
+      "name": "user",
+      "pages": [
+        "pages/favorites/favorites",
+        "pages/history/history",
+        "pages/recent/recent",
+        "pages/data-management/data-management"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/tools/tools": {
+      "network": "all",
+      "packages": [
+        "packageTools"
+      ]
+    },
+    "pages/index/index": {
+      "network": "wifi",
+      "packages": [
+        "packageTools"
+      ]
+    }
+  },
   "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "挽鹿工具箱",
     "navigationBarTextStyle": "black",
+    "backgroundColor": "#f4f6f8",
     "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "color": "#8b949b",
+    "selectedColor": "#2b7a68",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icons/tab/home.png",
+        "selectedIconPath": "assets/icons/tab/home-active.png"
+      },
+      {
+        "pagePath": "pages/tools/tools",
+        "text": "工具",
+        "iconPath": "assets/icons/tab/tools.png",
+        "selectedIconPath": "assets/icons/tab/tools-active.png"
+      },
+      {
+        "pagePath": "pages/discover/discover",
+        "text": "发现",
+        "iconPath": "assets/icons/tab/discover.png",
+        "selectedIconPath": "assets/icons/tab/discover-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/icons/tab/mine.png",
+        "selectedIconPath": "assets/icons/tab/mine-active.png"
+      }
+    ]
   },
   "permission": {
     "scope.writePhotosAlbum": {
       "desc": "用于保存生成或处理后的图片、视频到相册"
     }
   },
-  "renderer": "skyline",
-  "rendererOptions": {
-    "skyline": {
-      "defaultDisplayBlock": true,
-      "defaultContentBox": true,
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255"
-    }
-  },
-  "componentFramework": "glass-easel",
   "__usePrivacyCheck__": true,
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"

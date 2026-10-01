@@ -1,0 +1,19 @@
+<view class="page">
+  <navigation-bar title="发现内容" color="#1f2729" background="#f4f6f8"></navigation-bar>
+
+  <view class="content">
+    <view class="card hero">
+      <view class="hero-icon icon-wrap tone-indigo">
+        <t-icon name="star-filled" size="48rpx" color="#4f5fa8" />
+      </view>
+      <view class="hero-title">发现内容</view>
+      <view class="hero-desc">GitHub 榜单与原生文章内容统一使用独立分包承载</view>
+    </view>
+
+    <empty-state
+      title="暂无可展示内容"
+      desc="请从底部导航访问当前公开功能"
+      size="compact"
+    />
+  </view>
+</view>

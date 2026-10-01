@@ -1,0 +1,116 @@
+/* pages/discover/discover.wxss */
+page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+}
+
+.intro {
+  margin: 8rpx var(--wl-page-padding) 0;
+  padding: 28rpx 24rpx;
+  background: linear-gradient(180deg, var(--wl-primary-weak) 0%, var(--wl-surface) 100%);
+  border: 1rpx solid var(--wl-primary-light);
+}
+
+.intro-title {
+  font-size: var(--wl-font-xl);
+  font-weight: 700;
+  color: var(--wl-text);
+}
+
+.intro-desc {
+  margin-top: 10rpx;
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-sub);
+  line-height: 1.6;
+}
+
+.error-card {
+  margin: var(--wl-space) var(--wl-page-padding) 0;
+}
+
+.retry-button {
+  margin-top: var(--wl-space-sm);
+  padding: 0 28rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: var(--wl-radius-pill);
+  background: var(--wl-primary);
+  color: var(--wl-text-inverse);
+  font-size: var(--wl-font-sm);
+}
+
+.block {
+  margin-top: var(--wl-space-lg);
+}
+
+.tool-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--wl-space-sm) calc(var(--wl-page-padding) - 8rpx) 0;
+}
+
+.tool-cell {
+  width: 50%;
+  padding: 8rpx;
+}
+
+.tool-cell tool-card {
+  display: block;
+  height: 100%;
+}
+
+.category-grid {
+  display: flex;
+  flex-direction: column;
+  padding: var(--wl-space-sm) var(--wl-page-padding) 0;
+}
+
+.category-card {
+  display: flex;
+  align-items: center;
+  min-height: 112rpx;
+  margin-bottom: var(--wl-card-gap);
+  padding: 22rpx 24rpx;
+}
+
+.category-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.category-name {
+  font-size: var(--wl-font-md);
+  font-weight: 600;
+  color: var(--wl-text);
+}
+
+.category-desc {
+  margin-top: 6rpx;
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-weak);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.category-block {
+  padding-bottom: 4rpx;
+}
+
+.footer-space {
+  height: calc(48rpx + var(--wl-safe-bottom));
+}

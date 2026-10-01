@@ -1,0 +1,10 @@
+<view class="section-header">
+  <view class="header-main">
+    <view class="header-title">{{title}}</view>
+    <view wx:if="{{subtitle}}" class="header-subtitle">{{subtitle}}</view>
+  </view>
+  <view wx:if="{{showMore}}" class="header-more" bindtap="onMoreTap">
+    <text>{{moreText || '更多'}}</text>
+    <t-icon name="chevron-right" size="24rpx" color="#94a0a5" />
+  </view>
+</view>

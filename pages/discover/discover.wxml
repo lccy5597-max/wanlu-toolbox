@@ -1,0 +1,42 @@
+<view class="page">
+  <navigation-bar title="发现" back="{{false}}" color="#1f2729" background="#f4f6f8"></navigation-bar>
+
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="intro card">
+      <view class="intro-title">发现工具</view>
+      <view class="intro-desc">根据本机使用情况，找到更多实用工具</view>
+    </view>
+
+    <view wx:if="{{hasError}}" class="error-card card">
+      <empty-state icon="info-circle" title="部分内容暂时无法加载" desc="可以重新读取本机工具数据" size="compact">
+        <button class="retry-button" bindtap="onRetry">重新加载</button>
+      </empty-state>
+    </view>
+
+    <block wx:for="{{toolSections}}" wx:for-item="section" wx:key="key">
+      <view wx:if="{{section.tools.length}}" class="block">
+        <section-header title="{{section.title}}" subtitle="{{section.subtitle}}" />
+        <view class="tool-grid">
+          <view class="tool-cell" wx:for="{{section.tools}}" wx:for-item="tool" wx:key="id">
+            <tool-card tool="{{tool}}" mode="grid" bind:tap="onToolTap" />
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class="block category-block">
+      <section-header title="分类探索" subtitle="进入工具页查看完整目录" />
+      <view class="category-grid">
+        <view class="category-card card" wx:for="{{categories}}" wx:key="id" data-id="{{item.id}}" bindtap="onCategoryTap">
+          <view class="category-main">
+            <view class="category-name">{{item.name}}</view>
+            <view class="category-desc">{{item.description}}</view>
+          </view>
+          <t-icon name="chevron-right" size="28rpx" color="#94a0a5" />
+        </view>
+      </view>
+    </view>
+
+    <view class="footer-space"></view>
+  </scroll-view>
+</view>

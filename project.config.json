@@ -5,26 +5,86 @@
     "minified": true,
     "uglifyFileName": false,
     "enhance": true,
-    "packNpmRelationList": [],
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
     "useCompilerPlugins": false,
-    "minifyWXML": true
+    "minifyWXML": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./"
+      }
+    ],
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "simulatorPluginLibVersion": {},
   "packOptions": {
     "ignore": [
       {
-        "type": "folder",
-        "value": "assets/readme"
+        "value": "scripts",
+        "type": "folder"
+      },
+      {
+        "value": ".workbuddy",
+        "type": "folder"
+      },
+      {
+        "value": "packageTools/pages/wooden-fish",
+        "type": "folder"
+      },
+      {
+        "value": "packageTools/pages/zodiac",
+        "type": "folder"
+      },
+      {
+        "value": ".d.ts",
+        "type": "suffix"
+      },
+      {
+        "value": ".md",
+        "type": "suffix"
+      },
+      {
+        "value": "package-lock.json",
+        "type": "file"
+      },
+      {
+        "value": "project.private.config.json",
+        "type": "file"
+      },
+      {
+        "value": "Wanlu_Toolbox_Manual_Release_Checklist.md",
+        "type": "file"
+      },
+      {
+        "value": "assets/audio/wooden-fish.m4a",
+        "type": "file"
+      },
+      {
+        "value": "assets/icons/wooden-fish.png",
+        "type": "file"
+      },
+      {
+        "value": "assets/icons/wooden-fish-mallet.png",
+        "type": "file"
       }
     ],
     "include": []
   },
-  "appid": "wx493898a6b69f0e30",
-  "editorSetting": {}
+  "condition": {},
+  "editorSetting": {},
+  "appid": "wx0000000000000000",
+  "libVersion": "3.17.3"
 }

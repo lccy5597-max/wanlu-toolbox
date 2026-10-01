@@ -1,0 +1,69 @@
+<view class="shell">
+  <navigation-bar title="使用指南" back="{{true}}" color="#1f2729" background="#f4f6f8"></navigation-bar>
+
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="page">
+      <!-- 功能说明：紧凑说明条，统一样式见 styles/common.wxss -->
+      <view class="tool-hero">
+        <view class="tool-hero-icon">
+          <t-icon name="book-open" size="44rpx" color="#2b7a68" />
+        </view>
+        <view class="tool-hero-copy">
+          <view class="tool-hero-title">挽鹿工具箱使用指南</view>
+          <view class="tool-hero-desc">常用小工具收在一起，想到就能用。</view>
+        </view>
+        <favorite-action favorite="{{toolFavorite}}" bind:toggle="onToggleToolFavorite" />
+      </view>
+
+      <view class="intro-card">
+        <view class="intro-title">怎么用最顺手？</view>
+        <view class="intro-desc">先用搜索找到目标工具；常用功能可以直接从首页精选工具进入。工具结果通常会即时显示，图片类能力会提供预览和保存。</view>
+      </view>
+
+      <view class="guide-list">
+        <view
+          wx:for="{{guideSections}}"
+          wx:key="title"
+          class="guide-card"
+        >
+          <view class="guide-icon">
+            <t-icon name="{{item.icon}}" size="38rpx" color="#24584d" />
+          </view>
+          <view class="guide-copy">
+            <view class="guide-title">{{item.title}}</view>
+            <view class="guide-desc">{{item.desc}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="section-card">
+        <view class="section-title">工具小贴士</view>
+        <view class="tip-list">
+          <view
+            wx:for="{{toolTips}}"
+            wx:key="name"
+            class="tip-row"
+          >
+            <view class="tip-name">{{item.name}}</view>
+            <view class="tip-text">{{item.text}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="section-card">
+        <view class="section-title">使用说明</view>
+        <view class="notice-list">
+          <view
+            wx:for="{{notices}}"
+            wx:key="*this"
+            class="notice-row"
+          >
+            <view class="notice-dot"></view>
+            <view class="notice-text">{{item}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+

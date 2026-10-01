@@ -1,0 +1,64 @@
+<view class="page">
+  <navigation-bar title="工具" back="{{false}}" color="#1f2729" background="#f4f6f8"></navigation-bar>
+
+  <view class="search-bar">
+    <t-search
+      class="tools-search"
+      t-class-input-container="search-input"
+      value="{{inputKeyword}}"
+      placeholder="搜索工具名称或用途"
+      shape="round"
+      clearable
+      bind:change="onSearchInput"
+      bind:clear="onSearchClear"
+    />
+  </view>
+
+  <scroll-view class="category-bar" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="category-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="category-item {{activeCategory === item.id ? 'is-active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCategoryTap"
+      >
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="result-bar">
+      <text wx:if="{{keyword}}" class="result-text">“{{keyword}}” 共 {{totalCount}} 个结果</text>
+      <text wx:else class="result-text">共 {{totalCount}} 个工具 · {{hotCount}} 个热门</text>
+    </view>
+
+    <view class="tool-list" wx:if="{{tools.length}}">
+      <tool-card
+        wx:for="{{tools}}"
+        wx:key="id"
+        tool="{{item}}"
+        mode="list"
+        bind:tap="onToolTap"
+      />
+    </view>
+
+    <view wx:else class="empty-wrap">
+      <empty-state
+        wx:if="{{keyword}}"
+        icon="search"
+        title="没有找到相关工具"
+        desc="换个关键词试试，或看看其他分类"
+      />
+      <empty-state
+        wx:else
+        icon="app"
+        title="该分类暂无工具"
+        desc="这个分类暂时没有可用工具，换其他分类看看"
+      />
+    </view>
+
+    <view class="footer-space"></view>
+  </scroll-view>
+</view>

@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  flex: none;
+}
+
+.favorite-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112rpx;
+  height: 56rpx;
+  margin-left: 16rpx;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+  border: 1rpx solid rgba(43, 122, 104, 0.22);
+  border-radius: 28rpx;
+  background: rgba(255, 255, 255, 0.82);
+  color: #52615e;
+}
+
+.favorite-action.is-active {
+  border-color: rgba(43, 122, 104, 0.38);
+  background: #ffffff;
+  color: #2b7a68;
+}
+
+.favorite-icon {
+  margin-right: 6rpx;
+  font-size: 28rpx;
+  line-height: 1;
+}
+
+.favorite-text {
+  font-size: 22rpx;
+  line-height: 1;
+  white-space: nowrap;
+}

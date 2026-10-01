@@ -1,0 +1,315 @@
+/**
+ * 通用样式层
+ * 只放跨页面复用的基础类，业务特有样式请写在各自 WXSS 中。
+ */
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 0 0 calc(32rpx + var(--wl-safe-bottom));
+  background: var(--wl-bg);
+}
+
+.page-padding {
+  padding-left: var(--wl-page-padding);
+  padding-right: var(--wl-page-padding);
+}
+
+/* 卡片 */
+.card {
+  background: var(--wl-surface);
+  border-radius: var(--wl-radius);
+  box-shadow: var(--wl-shadow-card);
+  overflow: hidden;
+}
+
+.card-flat {
+  background: var(--wl-surface);
+  border-radius: var(--wl-radius);
+  border: 1rpx solid var(--wl-border);
+}
+
+.section {
+  margin: var(--wl-space-lg) var(--wl-page-padding) 0;
+}
+
+.section-title {
+  font-size: var(--wl-font-lg);
+  font-weight: 600;
+  color: var(--wl-text);
+  letter-spacing: 0.5rpx;
+}
+
+/* 文本 */
+.text-title {
+  font-size: var(--wl-font-lg);
+  font-weight: 600;
+  color: var(--wl-text);
+}
+
+.text-body {
+  font-size: var(--wl-font);
+  color: var(--wl-text-sub);
+  line-height: 1.6;
+}
+
+.text-sub {
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-sub);
+}
+
+.text-weak {
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-weak);
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.text-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* 标签 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 36rpx;
+  padding: 0 12rpx;
+  border-radius: var(--wl-radius-xs);
+  font-size: var(--wl-font-xs);
+  line-height: 1;
+}
+
+.badge-hot {
+  color: #b4472c;
+  background: #fbeae4;
+}
+
+.badge-new {
+  color: var(--wl-primary-dark);
+  background: var(--wl-primary-light);
+}
+
+.badge-vip {
+  color: #8a5a1c;
+  background: #f8ecd8;
+}
+
+.badge-ai {
+  color: #3d3f8f;
+  background: #ececf8;
+}
+
+/* 图标底色 */
+.icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--wl-radius-sm);
+}
+
+.tone-green {
+  background: var(--wl-tone-green-bg);
+}
+
+.tone-mint {
+  background: var(--wl-tone-mint-bg);
+}
+
+.tone-sky {
+  background: var(--wl-tone-sky-bg);
+}
+
+.tone-indigo {
+  background: var(--wl-tone-indigo-bg);
+}
+
+.tone-violet {
+  background: var(--wl-tone-violet-bg);
+}
+
+.tone-coral {
+  background: var(--wl-tone-coral-bg);
+}
+
+.tone-amber {
+  background: var(--wl-tone-amber-bg);
+}
+
+.tone-deep {
+  background: var(--wl-tone-deep-bg);
+}
+
+/* 分割线与留白 */
+.divider {
+  height: 1rpx;
+  background: var(--wl-border);
+}
+
+.gap-sm {
+  height: var(--wl-space-sm);
+}
+
+.gap {
+  height: var(--wl-space);
+}
+
+.gap-lg {
+  height: var(--wl-space-lg);
+}
+
+/* ============================================================
+ * 工具详情页统一模板
+ * 结构：工具说明条(.tool-hero) → 卡片(.wl-card) → 主按钮(.wl-btn-primary)
+ *       → 结果卡(.result-*)；页面骨架用 .tool-shell / .tool-scroll / .tool-page
+ * ============================================================ */
+
+/* 页面骨架：自定义导航 + 可滚动内容 + 底部安全区 */
+.tool-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.tool-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+}
+
+.tool-page {
+  padding: var(--space-md) var(--wl-page-padding) calc(48rpx + var(--wl-safe-bottom));
+  box-sizing: border-box;
+}
+
+/* 功能说明条：图标 + 名称 + 一句话用途，保持紧凑 */
+.tool-hero {
+  display: flex;
+  align-items: center;
+  padding: var(--space-md);
+  border-radius: var(--radius-large);
+  background: var(--brand-color-light);
+}
+
+.tool-hero-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: var(--radius-medium);
+  background: var(--bg-card);
+}
+
+.tool-hero-copy {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--space-md);
+}
+
+.tool-hero-title {
+  color: var(--text-primary);
+  font-size: var(--wl-font-md);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.tool-hero-desc {
+  margin-top: 6rpx;
+  color: var(--text-secondary);
+  font-size: var(--wl-font-sm);
+  line-height: 1.4;
+}
+
+/* 卡片容器 */
+.wl-card {
+  margin-top: var(--wl-card-gap);
+  padding: var(--space-md);
+  border-radius: var(--radius-large);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+
+.wl-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.wl-card-title {
+  color: var(--text-primary);
+  font-size: var(--wl-font-md);
+  font-weight: 600;
+}
+
+.wl-card-extra {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: var(--wl-font-xs);
+}
+
+/* 主操作按钮：统一 88rpx 高、品牌主色（作用于 t-button） */
+.wl-action-row {
+  margin-top: var(--wl-card-gap);
+}
+
+.wl-btn-primary {
+  --td-button-primary-bg-color: var(--brand-color);
+  --td-button-primary-border-color: var(--brand-color);
+  --td-button-primary-active-bg-color: var(--brand-color-dark);
+  --td-button-primary-active-border-color: var(--brand-color-dark);
+  --td-button-large-height: 88rpx;
+  --td-button-border-radius: 44rpx;
+  --td-button-primary-font-size: 30rpx;
+}
+
+/* 次级按钮（描边/浅底） */
+.wl-btn-secondary {
+  --td-button-default-bg-color: var(--brand-color-light);
+  --td-button-default-border-color: var(--brand-color-light);
+  --td-button-default-color: var(--brand-color-dark);
+  --td-button-default-active-bg-color: #d8eae4;
+  --td-button-default-active-border-color: #d8eae4;
+  --td-button-large-height: 88rpx;
+  --td-button-border-radius: 44rpx;
+}
+
+/* 大上传卡：图标 + “点击选择图片” + 格式说明 */
+.wl-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220rpx;
+  padding: var(--wl-space-lg);
+  border-radius: var(--radius-medium);
+  border: 2rpx dashed var(--wl-border-strong);
+  background: var(--wl-surface-sub);
+  box-sizing: border-box;
+}
+
+.wl-upload-title {
+  margin-top: var(--wl-space-sm);
+  color: var(--text-primary);
+  font-size: var(--wl-font);
+  font-weight: 500;
+}
+
+.wl-upload-desc {
+  margin-top: var(--wl-space-xs);
+  color: var(--text-placeholder);
+  font-size: var(--wl-font-xs);
+}

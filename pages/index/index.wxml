@@ -1,156 +1,84 @@
-<!--index.wxml-->
-<view class="shell">
-  <navigation-bar title="" back="{{false}}" color="#15231f" background="transparent"></navigation-bar>
+<view class="page">
+  <navigation-bar title="{{brand.name}}" back="{{false}}" color="#1f2729" background="#f4f6f8"></navigation-bar>
 
   <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
-    <view class="page">
-      <view class="top-area">
-        <t-search
-          class="search"
-          t-class-input-container="search-input"
-          placeholder="想用什么工具？搜一下"
-          shape="round"
-          clearable
-          bind:submit="onSearchSubmit"
-        />
-
-        <view class="quick-tags">
-          <t-tag
-            wx:for="{{quickTags}}"
-            wx:key="*this"
-            class="quick-tag"
-            shape="round"
-            theme="primary"
-            variant="light"
-            data-keyword="{{item}}"
-            bind:click="onQuickTagTap"
-          >{{item}}</t-tag>
-        </view>
+    <!-- 顶部品牌区 + 搜索 -->
+    <view class="header">
+      <view class="brand">
+        <view class="brand-name">{{brand.name}}</view>
+        <view class="brand-slogan">{{brand.slogan}}</view>
       </view>
 
-      <view
-        class="hero-card {{pressedKey === 'hero' ? 'is-pressing' : ''}}"
-        bindtap="onToolTap"
-        data-name="{{featuredTool.title}}"
-        data-path="{{featuredTool.path}}"
-        data-short-link="{{featuredTool.shortLink}}"
-        data-press-key="hero"
-        bindtouchstart="onPressStart"
-        bindtouchend="onPressEnd"
-        bindtouchcancel="onPressEnd"
-      >
-        <view class="hero-copy">
-          <view class="hero-badge">
-            <t-icon class="hero-badge-icon" name="star-filled" size="22rpx" color="#2f7567" />
-            <text>热门推荐</text>
-          </view>
-          <view class="hero-title">{{featuredTool.title}}</view>
-          <view class="hero-desc">{{featuredTool.desc}}</view>
-          <view class="hero-action">
-            <text>立即体验</text>
-            <t-icon name="arrow-right" size="28rpx" color="#2f7567" />
-          </view>
-        </view>
-        <view class="hero-visual">
-          <pindou-icon
-            wx:if="{{featuredTool.id === 'pindou'}}"
-            size="112rpx"
-          />
-          <image
-            wx:elif="{{featuredTool.iconImage}}"
-            class="hero-icon-image"
-            src="{{featuredTool.iconImage}}"
-            mode="aspectFit"
-          />
-          <t-icon wx:else name="{{featuredTool.icon}}" size="116rpx" color="#9fb4ae" />
-        </view>
-      </view>
+      <t-search
+        class="search"
+        t-class-input-container="search-input"
+        value="{{inputSearchKeyword}}"
+        placeholder="想用什么工具？搜一下"
+        shape="round"
+        clearable
+        bind:change="onSearchInput"
+        bind:clear="onSearchClear"
+        bind:submit="onSearchSubmit"
+      />
 
-      <view class="section-head">
-        <view class="section-title">热门工具</view>
-        <view class="section-more" bindtap="onViewAllTools">
-          <text>全部</text>
-          <t-icon name="chevron-right" size="24rpx" color="#72817d" />
-        </view>
+      <view class="stats">
+        <text class="stats-item">共 {{totalToolCount}} 个工具</text>
+        <text class="stats-dot">·</text>
+        <text class="stats-item">图片处理 {{imageToolCount}}</text>
+        <text class="stats-dot">·</text>
+        <text class="stats-item">计算 {{calcToolCount}}</text>
       </view>
-
-      <view class="tool-grid">
-        <view
-          wx:for="{{hotTools}}"
-          wx:key="id"
-          class="tool-card {{item.id === 'wooden-fish' ? 'is-wooden-fish-card' : ''}} {{pressedKey === item.id ? 'is-pressing' : ''}}"
-          bindtap="onToolTap"
-          data-name="{{item.title}}"
-          data-path="{{item.path}}"
-          data-short-link="{{item.shortLink}}"
-          data-press-key="{{item.id}}"
-          bindtouchstart="onPressStart"
-          bindtouchend="onPressEnd"
-          bindtouchcancel="onPressEnd"
-        >
-          <view class="tool-icon tone-{{item.tone}} {{item.iconBg === 'white' ? 'has-white-icon-bg' : (item.iconBg === 'black' ? 'has-black-icon-bg' : (item.iconBg === 'wooden-fish' ? 'has-wooden-fish-icon-bg' : ''))}}">
-            <block wx:if="{{item.id === 'wooden-fish'}}">
-              <image class="wooden-fish-icon-mallet" src="/assets/icons/wooden-fish-mallet.png" mode="aspectFit" />
-              <image class="wooden-fish-icon-body" src="/assets/icons/wooden-fish.png" mode="aspectFit" />
-            </block>
-            <image
-              wx:elif="{{item.iconImage}}"
-              class="tool-icon-image"
-              src="{{item.iconImage}}"
-              mode="aspectFit"
-            />
-            <t-icon wx:else name="{{item.icon}}" size="38rpx" color="{{item.iconColor}}" />
-          </view>
-          <view class="tool-title">{{item.title}}</view>
-          <view class="tool-desc">{{item.desc}}</view>
-        </view>
-      </view>
-
-      <view class="section-head topic-section-head">
-        <view class="section-title">精选专题</view>
-      </view>
-
-      <view class="topic-list">
-        <view
-          wx:for="{{topicCards}}"
-          wx:key="id"
-          class="topic-card topic-{{item.tone}} {{pressedKey === item.pressKey ? 'is-pressing' : ''}}"
-          bindtap="onToolTap"
-          data-name="{{item.title}}"
-          data-path="{{item.path}}"
-          data-press-key="{{item.pressKey}}"
-          bindtouchstart="onPressStart"
-          bindtouchend="onPressEnd"
-          bindtouchcancel="onPressEnd"
-        >
-          <button class="topic-feedback-link" open-type="contact" session-from="topic_guide" catchtap="onFeedbackTap">
-            <t-icon class="topic-feedback-icon" name="chat-bubble-help" size="24rpx" color="#ffffff" />
-            <text>问题反馈</text>
-          </button>
-          <view class="topic-copy">
-            <view class="topic-label">{{item.label}}</view>
-            <view class="topic-title">{{item.title}}</view>
-            <view class="topic-desc">{{item.desc}}</view>
-            <t-button
-              class="topic-button"
-              shape="round"
-              size="medium"
-              theme="primary"
-              variant="base"
-              bind:tap="onToolTap"
-              data-name="{{item.title}}"
-              data-path="{{item.path}}"
-              data-press-key="{{item.pressKey}}"
-            >
-              {{item.button}}
-            </t-button>
-          </view>
-          <view class="topic-icon">
-            <t-icon name="{{item.icon}}" size="118rpx" color="currentColor" />
-          </view>
-        </view>
-      </view>
-
     </view>
+
+    <block wx:if="{{isSearching}}">
+      <view class="search-result-bar">
+        <text class="search-result-text">“{{searchKeyword}}” 共 {{searchResults.length}} 个结果</text>
+      </view>
+
+      <view class="search-result-list" wx:if="{{searchResults.length}}">
+        <tool-card
+          wx:for="{{searchResults}}"
+          wx:key="id"
+          tool="{{item}}"
+          mode="list"
+          bind:tap="onToolTap"
+        />
+      </view>
+
+      <view wx:else class="search-empty-wrap">
+        <empty-state
+          icon="search"
+          title="没有找到相关工具"
+          desc="换个关键词试试"
+        />
+      </view>
+    </block>
+
+    <block wx:else>
+      <!-- 第一屏高频工具 -->
+      <view class="quick-section">
+        <view class="quick-grid">
+          <view class="quick-cell" wx:for="{{quickTools}}" wx:key="id">
+            <tool-card tool="{{item}}" mode="grid" bind:tap="onToolTap" />
+          </view>
+        </view>
+      </view>
+
+      <!-- 热门工具 -->
+      <view class="block">
+        <section-header title="热门工具" subtitle="大家最近常用的工具" showMore moreText="全部" bind:more="onViewAllTools" />
+        <view class="hot-list">
+          <tool-card
+            wx:for="{{hotTools}}"
+            wx:key="id"
+            tool="{{item}}"
+            mode="list"
+            bind:tap="onToolTap"
+          />
+        </view>
+      </view>
+    </block>
+
+    <view class="footer-space"></view>
   </scroll-view>
 </view>

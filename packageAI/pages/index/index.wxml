@@ -1,0 +1,19 @@
+<view class="page">
+  <navigation-bar title="AI 工具" color="#1f2729" background="#f4f6f8"></navigation-bar>
+
+  <view class="content">
+    <view class="card hero">
+      <view class="hero-icon icon-wrap tone-violet">
+        <t-icon name="image" size="48rpx" color="#6655a6" />
+      </view>
+      <view class="hero-title">AI 工具</view>
+      <view class="hero-desc">AI 能力采用独立分包与服务接口隔离</view>
+    </view>
+
+    <empty-state
+      title="暂无可展示内容"
+      desc="请从首页或工具页使用当前公开功能"
+      size="compact"
+    />
+  </view>
+</view>

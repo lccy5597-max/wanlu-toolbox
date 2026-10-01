@@ -1,0 +1,132 @@
+<view class="shell">
+  <navigation-bar title="二维码生成" back="{{true}}"></navigation-bar>
+
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="page">
+      <!-- 功能说明：紧凑，不占高度 -->
+      <view class="tool-hero">
+        <view class="tool-hero-icon">
+          <t-icon name="qrcode" size="44rpx" color="#2b7a68" />
+        </view>
+        <view class="tool-hero-copy">
+          <view class="tool-hero-title">二维码生成</view>
+          <view class="tool-hero-desc">文字、链接一键生成二维码</view>
+        </view>
+        <favorite-action favorite="{{toolFavorite}}" bind:toggle="onToggleToolFavorite" />
+      </view>
+
+      <!-- 卡片一：输入内容 -->
+      <view class="wl-card">
+        <view class="wl-card-head">
+          <view class="wl-card-title">输入内容</view>
+          <view class="wl-card-extra">
+            <text
+              wx:if="{{inputValue}}"
+              class="clear-button"
+              bindtap="onClearInput"
+              aria-role="button"
+            >清空</text>
+            <text class="char-count">{{inputValue.length}}/500</text>
+          </view>
+        </view>
+        <textarea
+          class="content-textarea"
+          value="{{inputValue}}"
+          maxlength="500"
+          placeholder="粘贴文字或链接，点击下方按钮生成二维码"
+          placeholder-class="textarea-placeholder"
+          show-confirm-bar="{{false}}"
+          disable-default-padding="{{true}}"
+          bindinput="onInput"
+        />
+      </view>
+
+      <!-- 卡片二：二维码设置 -->
+      <view class="wl-card">
+        <view class="wl-card-head">
+          <view class="wl-card-title">二维码设置</view>
+          <view class="wl-card-extra">中间 Logo 可选</view>
+        </view>
+
+        <view wx:if="{{logoPath}}" class="logo-preview">
+          <image class="logo-image" src="{{logoPath}}" mode="aspectFill"></image>
+          <view class="logo-info">
+            <view class="logo-title">已添加 logo</view>
+            <view class="logo-desc">将嵌入二维码中心</view>
+          </view>
+          <view class="logo-remove" bindtap="onRemoveLogo" aria-role="button">
+            <t-icon name="close" size="26rpx" color="#5f6d72" />
+          </view>
+        </view>
+
+        <view wx:else class="logo-uploader" bindtap="onChooseLogo" aria-role="button">
+          <t-icon name="image-add" size="40rpx" color="#2b7a68" />
+          <view class="upload-copy">
+            <view class="upload-title">上传图片</view>
+            <view class="upload-desc">建议使用清晰的方形图标</view>
+          </view>
+          <t-icon name="chevron-right" size="32rpx" color="#94a0a5" />
+        </view>
+      </view>
+
+      <!-- 主操作 -->
+      <view class="wl-action-row">
+        <t-button
+          class="wl-btn-primary"
+          block
+          shape="round"
+          size="large"
+          theme="primary"
+          disabled="{{!inputValue}}"
+          bind:tap="onGenerate"
+        >生成二维码</t-button>
+      </view>
+
+      <!-- 结果卡：生成后才出现，高度随内容自适应 -->
+      <view wx:if="{{hasGenerated}}" class="wl-card result-card">
+        <view class="wl-card-head">
+          <view class="wl-card-title">生成结果</view>
+          <view class="result-meta">版本 {{qrVersion}} · 纠错 {{qrEcc}}</view>
+        </view>
+
+        <view class="result-stage">
+          <image
+            wx:if="{{previewPath}}"
+            class="qr-image"
+            src="{{previewPath}}"
+            mode="aspectFit"
+            show-menu-by-longpress="{{true}}"
+          />
+          <view wx:else class="result-loading">
+            <t-icon name="loading" size="40rpx" color="#2b7a68" />
+            <text class="result-loading-text">正在生成图片…</text>
+          </view>
+        </view>
+
+        <view class="result-tip">建议先扫码验证，再保存或分享</view>
+
+        <view class="result-actions">
+          <t-button
+            class="result-action-main"
+            shape="round"
+            size="large"
+            theme="primary"
+            disabled="{{!previewPath || isSaving}}"
+            loading="{{isSaving}}"
+            bind:tap="onSave"
+          >保存图片</t-button>
+          <t-button
+            class="result-action-sub"
+            shape="round"
+            size="large"
+            theme="default"
+            bind:tap="onRegenerate"
+          >重新生成</t-button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 离屏导出画布：只用于绘制与导出，不参与布局展示 -->
+  <canvas type="2d" id="exportCanvas" class="export-canvas"></canvas>
+</view>

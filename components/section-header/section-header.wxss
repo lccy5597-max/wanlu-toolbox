@@ -1,0 +1,32 @@
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 var(--wl-page-padding);
+}
+
+.header-main {
+  min-width: 0;
+}
+
+.header-title {
+  font-size: var(--wl-font-lg);
+  font-weight: 600;
+  color: var(--wl-text);
+  letter-spacing: 0.5rpx;
+}
+
+.header-subtitle {
+  margin-top: 6rpx;
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-weak);
+}
+
+.header-more {
+  display: flex;
+  align-items: center;
+  flex: none;
+  padding-left: 16rpx;
+  font-size: var(--wl-font-sm);
+  color: var(--wl-text-weak);
+}

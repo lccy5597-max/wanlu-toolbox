@@ -1,0 +1,322 @@
+/* 星座计算器 —— 已按「挽鹿工具箱」统一设计规范重构视觉：
+   浅色背景 + 品牌色 + 统一卡片圆角/按钮高度/字体层级 + 底部安全区。
+   骨架为 .shell / .page-scroll / .page（与其他工具页一致），
+   功能结构与 JS 逻辑未改动。 */
+
+page {
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-page);
+  color: var(--text-primary);
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+  background: var(--bg-page);
+}
+
+.page {
+  min-height: 100%;
+  padding: var(--space-md) var(--wl-page-padding) calc(48rpx + var(--wl-safe-bottom));
+  box-sizing: border-box;
+  background: var(--bg-page);
+}
+
+/* 通用卡片 */
+.form-card,
+.result-card,
+.zodiac-card {
+  margin-top: var(--wl-card-gap);
+  padding: var(--space-md);
+  border: 1rpx solid var(--border-color);
+  border-radius: var(--radius-large);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+
+.card-title {
+  color: var(--text-primary);
+  font-size: var(--wl-font-lg);
+  font-weight: 600;
+}
+
+.card-subtitle {
+  margin-top: 6rpx;
+  color: var(--text-secondary);
+  font-size: var(--wl-font-sm);
+}
+
+/* 规则标签 */
+.rule-panel,
+.basis-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wl-space-sm);
+  margin-top: var(--space-md);
+}
+
+.rule-chip,
+.basis-chip {
+  padding: 8rpx 20rpx;
+  border-radius: var(--wl-radius-pill);
+  background: var(--brand-color-light);
+  color: var(--brand-color-dark);
+  font-size: var(--wl-font-sm);
+}
+
+/* 生日选择 */
+.field-row {
+  display: flex;
+  align-items: center;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-medium);
+  background: var(--bg-sub);
+}
+
+.field-icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72rpx;
+  height: 72rpx;
+  margin-right: var(--space-md);
+  border-radius: var(--radius-medium);
+  background: var(--bg-card);
+}
+
+.field-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.field-label {
+  color: var(--text-secondary);
+  font-size: var(--wl-font-sm);
+}
+
+.field-picker {
+  display: block;
+}
+
+.picker-value {
+  margin-top: 8rpx;
+  color: var(--text-placeholder);
+  font-size: var(--wl-font-lg);
+  font-weight: 500;
+}
+
+.picker-value.has-value {
+  color: var(--text-primary);
+}
+
+.helper-note {
+  margin-top: var(--space-md);
+  color: var(--text-placeholder);
+  font-size: var(--wl-font-sm);
+  line-height: 1.6;
+}
+
+/* 查询结果 */
+.result-card.is-active {
+  border-color: var(--brand-color-light);
+}
+
+.result-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.result-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.result-label {
+  color: var(--text-secondary);
+  font-size: var(--wl-font-sm);
+}
+
+.result-name {
+  margin-top: 8rpx;
+  color: var(--text-primary);
+  font-size: 48rpx;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.result-meta {
+  margin-top: 8rpx;
+  color: var(--text-secondary);
+  font-size: var(--wl-font-sm);
+}
+
+.result-range {
+  margin-top: 6rpx;
+  color: var(--text-placeholder);
+  font-size: var(--wl-font-sm);
+}
+
+.zodiac-symbol {
+  flex: none;
+  margin-left: var(--space-md);
+  font-size: 80rpx;
+  line-height: 1;
+}
+
+.basis-panel {
+  margin-top: var(--space-md);
+}
+
+.info-grid {
+  display: flex;
+  gap: var(--wl-space-sm);
+  margin-top: var(--space-md);
+}
+
+.info-item {
+  flex: 1;
+  padding: var(--wl-space-sm);
+  border-radius: var(--radius-medium);
+  background: var(--bg-sub);
+  text-align: center;
+}
+
+.info-label {
+  color: var(--text-secondary);
+  font-size: var(--wl-font-xs);
+}
+
+.info-value {
+  margin-top: 6rpx;
+  color: var(--text-primary);
+  font-size: var(--wl-font);
+  font-weight: 500;
+}
+
+.section-title {
+  margin-top: var(--wl-space-lg);
+  color: var(--text-primary);
+  font-size: var(--wl-font-md);
+  font-weight: 600;
+}
+
+.keyword-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wl-space-sm);
+  margin-top: var(--wl-space-sm);
+}
+
+.keyword-chip {
+  padding: 10rpx var(--space-md);
+  border-radius: var(--wl-radius-pill);
+  background: var(--brand-color-light);
+  color: var(--brand-color-dark);
+  font-size: var(--wl-font-sm);
+}
+
+.desc-card {
+  margin-top: var(--wl-space-sm);
+  padding: var(--space-md);
+  border-radius: var(--radius-medium);
+  background: var(--bg-sub);
+  color: var(--text-secondary);
+  font-size: var(--wl-font);
+  line-height: 1.7;
+}
+
+.reset-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  margin-top: var(--space-md);
+  border-radius: 44rpx;
+  color: var(--brand-color-dark);
+  font-size: var(--wl-font-md);
+  font-weight: 500;
+  background: var(--brand-color-light);
+}
+
+.result-empty {
+  padding: var(--wl-space-lg) var(--wl-space-sm);
+  text-align: center;
+}
+
+.empty-title {
+  color: var(--text-primary);
+  font-size: var(--wl-font-md);
+  font-weight: 600;
+}
+
+.empty-desc {
+  margin-top: var(--wl-space-sm);
+  color: var(--text-secondary);
+  font-size: var(--wl-font-sm);
+  line-height: 1.7;
+}
+
+.empty-tip {
+  margin-top: var(--wl-space-sm);
+  color: var(--text-placeholder);
+  font-size: var(--wl-font-xs);
+}
+
+/* 十二星座日期表 */
+.zodiac-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--wl-space-sm);
+  margin-top: var(--space-md);
+}
+
+.zodiac-item {
+  flex: 1 1 200rpx;
+  padding: var(--wl-space-sm) var(--space-md);
+  border: 1rpx solid var(--border-color);
+  border-radius: var(--radius-medium);
+  background: var(--bg-card);
+  box-sizing: border-box;
+}
+
+.zodiac-item-head {
+  display: flex;
+  align-items: center;
+}
+
+.zodiac-mini-symbol {
+  flex: none;
+  font-size: 40rpx;
+  line-height: 1;
+}
+
+.zodiac-mini-copy {
+  min-width: 0;
+  margin-left: var(--wl-space-sm);
+}
+
+.zodiac-mini-name {
+  color: var(--text-primary);
+  font-size: var(--wl-font);
+  font-weight: 500;
+}
+
+.zodiac-mini-range {
+  margin-top: 6rpx;
+  color: var(--text-placeholder);
+  font-size: var(--wl-font-xs);
+}
