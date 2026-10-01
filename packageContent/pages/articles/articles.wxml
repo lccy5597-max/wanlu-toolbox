@@ -1,0 +1,81 @@
+<view class="page">
+  <navigation-bar title="挽鹿资讯" back="{{true}}"></navigation-bar>
+
+  <scroll-view
+    class="page-scroll"
+    scroll-y
+    enhanced
+    show-scrollbar="{{false}}"
+    lower-threshold="120"
+    bindscrolltolower="onReachBottom"
+  >
+    <view class="content">
+      <view class="intro card">
+        <view class="intro-title">挽鹿资讯</view>
+        <view class="intro-desc">以原生页面阅读网站内容，保持简洁的移动端体验。</view>
+      </view>
+
+      <view wx:if="{{isFallback && hasLoaded}}" class="fallback-hint">当前显示缓存内容</view>
+
+      <view wx:if="{{status === 'loading' && !hasLoaded}}" class="state-card card">
+        <view class="loading-indicator"></view>
+        <view class="state-title">正在加载内容</view>
+      </view>
+
+      <view wx:elif="{{status === 'unavailable'}}" class="state-card card">
+        <empty-state icon="info-circle" title="{{errorView.title}}" desc="{{errorView.description}}" size="compact" />
+      </view>
+
+      <view wx:elif="{{status === 'error'}}" class="state-card card">
+        <empty-state icon="info-circle" title="{{errorView.title}}" desc="{{errorView.description}}" size="compact">
+          <button wx:if="{{errorView.retryable}}" class="retry-button" bindtap="onRetry">重新加载</button>
+        </empty-state>
+      </view>
+
+      <view wx:elif="{{status === 'empty'}}" class="state-card card">
+        <empty-state icon="file" title="暂时没有内容" desc="稍后再来看看" size="compact" />
+      </view>
+
+      <view wx:else class="article-list">
+        <view
+          class="article-card card"
+          hover-class="article-card-active"
+          wx:for="{{items}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onArticleTap"
+        >
+          <image
+            wx:if="{{item.coverVisible}}"
+            class="article-cover"
+            src="{{item.cover}}"
+            mode="aspectFill"
+            lazy-load
+            data-id="{{item.id}}"
+            binderror="onCoverError"
+          />
+          <view class="article-body">
+            <view class="article-title text-clamp-2">{{item.title}}</view>
+            <view class="article-excerpt text-clamp-2">{{item.excerpt}}</view>
+            <view class="article-meta">
+              <text class="article-category">{{item.category}}</text>
+              <text wx:if="{{item.displayPublishTime}}" class="meta-separator">·</text>
+              <text wx:if="{{item.displayPublishTime}}">{{item.displayPublishTime}}</text>
+              <text wx:if="{{item.author}}" class="meta-separator">·</text>
+              <text wx:if="{{item.author}}" class="article-author">{{item.author}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{items.length}}" class="list-footer">
+        <view wx:if="{{isLoadingMore}}" class="footer-text">正在加载更多</view>
+        <view wx:elif="{{loadMoreError}}" class="load-more-error">
+          <text class="footer-text">{{loadMoreError.title}}</text>
+          <button wx:if="{{loadMoreError.retryable}}" class="retry-button compact" bindtap="onLoadMoreRetry">重新加载</button>
+        </view>
+        <view wx:elif="{{!hasMore}}" class="footer-text">已加载全部内容</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

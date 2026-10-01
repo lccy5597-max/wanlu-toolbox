@@ -1,19 +1,72 @@
 <view class="page">
-  <navigation-bar title="发现内容" color="#1f2729" background="#f4f6f8"></navigation-bar>
+  <navigation-bar title="GitHub 榜单" color="#1f2729" background="#f4f6f8"></navigation-bar>
 
-  <view class="content">
-    <view class="card hero">
-      <view class="hero-icon icon-wrap tone-indigo">
-        <t-icon name="star-filled" size="48rpx" color="#4f5fa8" />
+  <scroll-view class="page-scroll" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="content">
+      <view class="intro card">
+        <view class="intro-main">
+          <view class="intro-icon icon-wrap tone-indigo">
+            <t-icon name="star-filled" size="40rpx" color="#4f5fa8" />
+          </view>
+          <view class="intro-copy">
+            <view class="intro-title">GitHub 精选榜单</view>
+            <view class="intro-desc">按挽鹿服务器提供的榜单顺序展示，每榜最多 5 个仓库。</view>
+          </view>
+        </view>
       </view>
-      <view class="hero-title">发现内容</view>
-      <view class="hero-desc">GitHub 榜单与原生文章内容统一使用独立分包承载</view>
-    </view>
 
-    <empty-state
-      title="暂无可展示内容"
-      desc="请从底部导航访问当前公开功能"
-      size="compact"
-    />
-  </view>
+      <view class="period-tabs card">
+        <view
+          class="period-tab {{selectedPeriod === item.value ? 'is-active' : ''}}"
+          wx:for="{{tabs}}"
+          wx:key="value"
+          data-period="{{item.value}}"
+          bindtap="onPeriodTap"
+        >
+          {{item.label}}
+        </view>
+      </view>
+
+      <view wx:if="{{status === 'loading'}}" class="state-card card">
+        <view class="loading-indicator"></view>
+        <view class="state-title">正在加载榜单</view>
+      </view>
+
+      <view wx:elif="{{status === 'unavailable'}}" class="state-card card">
+        <empty-state icon="info-circle" title="{{errorView.title}}" desc="{{errorView.description}}" size="compact" />
+      </view>
+
+      <view wx:elif="{{status === 'error'}}" class="state-card card">
+        <empty-state icon="info-circle" title="{{errorView.title}}" desc="{{errorView.description}}" size="compact">
+          <button wx:if="{{errorView.retryable}}" class="retry-button" bindtap="onRetry">重新加载</button>
+        </empty-state>
+      </view>
+
+      <view wx:elif="{{status === 'empty'}}" class="state-card card">
+        <empty-state icon="star" title="暂时没有榜单数据" desc="稍后再来看看" size="compact" />
+      </view>
+
+      <view wx:elif="{{status === 'success'}}" class="repo-list">
+        <view class="repo-card card" wx:for="{{items}}" wx:key="id">
+          <view class="repo-head">
+            <view class="repo-rank">#{{item.rank}}</view>
+            <view class="repo-title-wrap">
+              <view class="repo-name text-ellipsis">{{item.name}}</view>
+              <view class="repo-full-name text-ellipsis">{{item.fullName}}</view>
+            </view>
+          </view>
+
+          <view wx:if="{{item.hasDescription}}" class="repo-description text-clamp-2">{{item.description}}</view>
+
+          <view class="repo-meta">
+            <text class="repo-stars">★ {{item.displayStars}}</text>
+            <text wx:if="{{item.hasLanguage}}" class="meta-dot">·</text>
+            <text wx:if="{{item.hasLanguage}}" class="repo-language">{{item.language}}</text>
+            <text wx:if="{{item.displayUpdatedAt}}" class="meta-dot">·</text>
+            <text wx:if="{{item.displayUpdatedAt}}">{{item.displayUpdatedAt}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
 </view>

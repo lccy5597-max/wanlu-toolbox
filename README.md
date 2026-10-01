@@ -67,12 +67,14 @@
 - 正式 `tool-catalog` 当前固定为 24 个公开工具；`wooden-fish` / `zodiac` 源码保留但不注册、不进入 catalog，并从正式构建排除。
 - Stage 4 功能回归当前为 733 cases；另有独立的 20 cases 静态规则测试，防止 Search、Discovery、Storage、权限和未来模块边界回退。
 
-### 未来远程能力（当前继续隔离）
+### Stage 5 Remote Content / GitHub（代码侧已完成，当前继续隔离）
 
-- `packageGithub`：保留 GitHub + `wanluu.com` 内容架构，当前不调用真实 API，也没有正式首页/发现页入口。
-- `packageAI`：保留 AI 能力架构，当前不调用真实 AI API，也没有正式 Tab/首页/发现页入口。
-- `services/content.js`：保留未来网站文章内容接入的数据模型与接口骨架，当前只返回未连接结果。
-- 微信登录、云端同步、会员、支付、广告目前均未接入正式业务。
+- 已建立统一 Environment、API Contract、API Client、WeChat Transport 与 `/api/v1` Endpoint Contract；`development` / `production` 的 Remote 默认均为关闭。
+- `packageContent` 已实现原生文章列表、文章详情、`rich-text` 与独立 `wl_content_cache_v1` Network First / Controlled Fallback；当前没有首页、工具、发现、我的或 TabBar 公开入口。
+- `services/github.js` 与 `packageGithub/pages/index` 已实现今日 / 本周 / 总榜客户端链路；当前没有首页、工具、发现、我的或 TabBar 公开入口，不直连 `api.github.com`。
+- 正式 Base URL 仍为 `https://api.example.com` 占位值；尚未接入真实服务器、真实 WordPress 内容源或真实 GitHub 榜单代理。
+- `packageAI` 继续保持 Skeleton；微信登录、云端同步、会员、支付、广告均未接入正式业务。
+- Stage 5 当前代码侧回归为 813 cases（包含 110 cases Static / Security Regression）；服务器联调、request 合法域名、HTTPS、真机和微信平台配置继续属于人工验收项。
 
 ---
 
@@ -97,10 +99,11 @@ npm run prune:npm
 npm run test:stage4
 npm run test:stage4:static
 npm run test:stage3
+npm run test-stage5
 npm run check
 ```
 
-`npm run test:stage4` 当前执行 733 个功能回归用例，覆盖工具核心逻辑、Search、Search Integration、Discovery、Discover Integration 与 Interaction；`npm run test:stage4:static` 独立执行 20 个静态规则测试。`npm run test:stage3` 覆盖收藏 Tombstone、浏览记录、最近使用、使用次数、migration、损坏数据恢复、工具偏好白名单、清空数据和未来合并纯函数。`npm run check` 覆盖页面/组件/导航/权限/密钥/Stage 3 数据架构，并固化 Stage 4 的 Search、Discovery、Storage、远程请求、正式工具和未来模块隔离边界。有 ERROR 时脚本以退出码 1 结束。
+`npm run test:stage4` 当前执行 733 个功能回归用例，覆盖工具核心逻辑、Search、Search Integration、Discovery、Discover Integration 与 Interaction；`npm run test:stage4:static` 独立执行 20 个静态规则测试。`npm run test:stage3` 覆盖收藏 Tombstone、浏览记录、最近使用、使用次数、migration、损坏数据恢复、工具偏好白名单、清空数据和未来合并纯函数。`npm run test-stage5` 当前执行 813 个 Stage 5 API / Content / GitHub / Static-Security 回归用例。`npm run check` 同时覆盖 Stage 3、Stage 4、Stage 5、权限、Secret、Storage、Provider 直连、正式工具与公开入口防回退；有 ERROR 时脚本以退出码 1 结束。
 
 > [!WARNING]
 > 项目已关闭 Skyline 渲染器，统一使用 WebView 渲染（`renderer` 相关配置已移除，`project.private.config.json` 中 `skylineRenderEnable` 为 `false`）。改动渲染相关配置前请先在开发者工具里验证。

@@ -573,6 +573,15 @@ Android
 - **【B】** 页面退出后的真实异步回调时序
 - **【B】** 图片/视频临时文件生命周期
 - **【B】** `choice-helper` 动画实际观感
+- **【B】** Stage 5 Content List 微信开发者工具真实编译与真机展示
+- **【B】** Stage 5 Content Detail 真机导航、`rich-text` 排版、远程图片与超长文章表现
+- **【B】** `wl_content_cache_v1` 微信 Storage 真机容量、读取性能与损坏恢复表现
+- **【B】** 断网 Content Cache Fallback 与网络恢复后的 Network First 刷新
+- **【B】** GitHub 今日 / 本周 / 总榜三 Tab 真机切换、快速切换竞态与窄屏表现
+- **【B】** iPhone / Android / 不同微信版本下 Stage 5 Content / GitHub 页面兼容性
+- **【B】** 真实挽鹿 API 服务器联调（当前尚未部署 / 接入）
+- **【B】** 微信 request 合法域名配置、真实 HTTPS 证书与 TLS 表现
+- **【B】** 微信后台隐私声明、备案、审核、版本上传与正式发布
 
 这些能力的统一状态文字：
 
@@ -619,6 +628,16 @@ Android
 - [x] Discovery Service / 发现页本地动态发现架构
 - [x] Interaction 防重入 / Usage 语义回归
 - [x] `npm run check` Stage 4 防回退规则 0 ERROR / 0 WARNING
+- [x] Stage 5 Environment / API Contract / API Client / Transport 架构
+- [x] Stage 5 Content Service / Content List / Content Detail 代码侧回归
+- [x] Stage 5 `rich-text` 安全边界与服务端 Sanitized HTML Contract
+- [x] Stage 5 Content Cache / Controlled Fallback 代码侧回归
+- [x] Stage 5 GitHub Service / 今日 / 本周 / 总榜 UI 代码侧回归
+- [x] Stage 5 Remote development / production 默认关闭
+- [x] Stage 5 Provider 直连 / Secret / Storage / Privacy / Permission / Public Entry 防回退
+- [x] Stage 5 Static / Security Regression 110 cases
+- [x] Stage 5 总回归 813 cases
+- [x] `npm run check` 已集成 Stage 5 总审计，0 ERROR / 0 WARNING
 
 注意：A 类仅代表可通过代码和自动化环境验证的部分，不替代 B 类人工环境验收。
 

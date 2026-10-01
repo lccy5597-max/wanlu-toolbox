@@ -26,61 +26,32 @@ page {
 }
 
 .intro {
-  padding: 24rpx;
+  padding: 28rpx 24rpx;
   background: linear-gradient(180deg, var(--wl-primary-weak) 0%, var(--wl-surface) 100%);
   border: 1rpx solid var(--wl-primary-light);
 }
 
-.intro-main {
-  display: flex;
-  align-items: center;
-}
-
-.intro-icon {
-  flex: none;
-  width: 72rpx;
-  height: 72rpx;
-}
-
-.intro-copy {
-  flex: 1;
-  min-width: 0;
-  margin-left: var(--wl-space-sm);
-}
-
 .intro-title {
   color: var(--wl-text);
-  font-size: var(--wl-font-lg);
+  font-size: var(--wl-font-xl);
   font-weight: 700;
 }
 
 .intro-desc {
-  margin-top: 8rpx;
+  margin-top: 10rpx;
   color: var(--wl-text-sub);
   font-size: var(--wl-font-sm);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
-.period-tabs {
-  display: flex;
-  margin-top: var(--wl-space);
-  padding: 8rpx;
-}
-
-.period-tab {
-  flex: 1;
-  min-height: 68rpx;
+.fallback-hint {
+  margin-top: var(--wl-space-sm);
+  padding: 14rpx 20rpx;
   border-radius: var(--wl-radius-sm);
-  color: var(--wl-text-sub);
-  font-size: var(--wl-font-sm);
-  line-height: 68rpx;
+  background: var(--wl-primary-weak);
+  color: var(--wl-primary-dark);
+  font-size: var(--wl-font-xs);
   text-align: center;
-}
-
-.period-tab.is-active {
-  background: var(--wl-primary);
-  color: var(--wl-text-inverse);
-  font-weight: 600;
 }
 
 .state-card {
@@ -96,7 +67,7 @@ page {
   border: 4rpx solid var(--wl-primary-light);
   border-top-color: var(--wl-primary);
   border-radius: 50%;
-  animation: github-spin 0.8s linear infinite;
+  animation: content-spin 0.8s linear infinite;
 }
 
 .state-title {
@@ -117,84 +88,97 @@ page {
   line-height: 72rpx;
 }
 
-.repo-list {
+.retry-button.compact {
+  min-width: 152rpx;
+  min-height: 64rpx;
+  margin-top: 12rpx;
+  line-height: 64rpx;
+}
+
+.article-list {
   margin-top: var(--wl-space);
 }
 
-.repo-card {
-  margin-bottom: var(--wl-card-gap);
-  padding: 24rpx;
-}
-
-.repo-head {
+.article-card {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
+  min-height: 180rpx;
+  margin-bottom: var(--wl-card-gap);
 }
 
-.repo-rank {
+.article-card-active {
+  opacity: 0.86;
+}
+
+.article-cover {
   flex: none;
-  min-width: 58rpx;
-  height: 48rpx;
-  padding: 0 10rpx;
-  border-radius: var(--wl-radius-xs);
-  background: var(--wl-primary-weak);
-  color: var(--wl-primary-dark);
-  font-size: var(--wl-font-sm);
-  font-weight: 700;
-  line-height: 48rpx;
-  text-align: center;
+  width: 190rpx;
+  min-height: 180rpx;
+  background: var(--wl-surface-sub);
 }
 
-.repo-title-wrap {
+.article-body {
   flex: 1;
   min-width: 0;
-  margin-left: var(--wl-space-sm);
+  padding: 22rpx 24rpx;
 }
 
-.repo-name {
+.article-title {
   color: var(--wl-text);
   font-size: var(--wl-font-md);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-.repo-full-name {
-  margin-top: 4rpx;
-  color: var(--wl-text-weak);
-  font-size: var(--wl-font-xs);
-  line-height: 1.4;
-}
-
-.repo-description {
-  margin-top: 16rpx;
+.article-excerpt {
+  margin-top: 10rpx;
   color: var(--wl-text-sub);
   font-size: var(--wl-font-sm);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
-.repo-meta {
+.article-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 18rpx;
+  margin-top: 14rpx;
   color: var(--wl-text-weak);
   font-size: var(--wl-font-xs);
   line-height: 1.5;
 }
 
-.repo-stars {
-  color: var(--wl-text-sub);
-}
-
-.repo-language {
+.article-category {
   color: var(--wl-primary-dark);
 }
 
-.meta-dot {
+.meta-separator {
   margin: 0 8rpx;
 }
 
-@keyframes github-spin {
+.article-author {
+  max-width: 220rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.list-footer {
+  padding: 8rpx 0 20rpx;
+  text-align: center;
+}
+
+.footer-text {
+  color: var(--wl-text-weak);
+  font-size: var(--wl-font-sm);
+}
+
+.load-more-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes content-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }

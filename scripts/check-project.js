@@ -24,6 +24,7 @@
 const fs = require('fs')
 const path = require('path')
 const { runStage4StaticChecks } = require('./stage4-static-rules')
+const { runStage5StaticChecks } = require('./stage5-static-rules')
 
 const ROOT = path.resolve(__dirname, '..')
 
@@ -646,10 +647,12 @@ for (const jf of allJs) {
   if (rp.includes('node_modules') || rp.includes('miniprogram_npm') || rp.startsWith('scripts/') || rp.startsWith('.workbuddy/')) continue
   const c = stripJsComments(read(jf) || '')
   const isDormantModerationAdapter = rp === 'utils/image-moderation.js'
-  const hasRemoteApi = /wx\.(?:login|request|downloadFile|connectSocket)\s*\(/.test(c)
+  const isStage5WechatTransport = rp === 'utils/api-transport.js'
+  const hasRemoteApi = /wx\.(?:login|downloadFile|connectSocket)\s*\(/.test(c)
+    || (!isStage5WechatTransport && /wx\.request\s*\(/.test(c))
     || (!isDormantModerationAdapter && /wx\.uploadFile\s*\(/.test(c))
   if (hasRemoteApi) {
-    error(`${rp} Stage 3 不允许接入真实登录或远程请求`); stage3Hit += 1
+    error(`${rp} Stage 3 不允许绕过 Stage 5 统一 Transport 接入真实登录或远程请求`); stage3Hit += 1
   }
 }
 
@@ -676,6 +679,18 @@ console.log(
   stage4Static.errors.length === 0 && stage4Static.warnings.length === 0
     ? 'OK  Stage 4 搜索、Discovery、Storage、权限、远程请求与正式工具边界通过'
     : `发现 ${stage4Static.errors.length} 个 ERROR / ${stage4Static.warnings.length} 个 WARNING`,
+)
+
+// ------------------------------------------------- 15. Stage 5 API 基础防回退规则
+
+console.log('---- [15] Stage 5 Remote / Security / Privacy / Static 总审计 ----')
+const stage5Static = runStage5StaticChecks(ROOT)
+stage5Static.errors.forEach((message) => error(message))
+stage5Static.warnings.forEach((message) => warn(message))
+console.log(
+  stage5Static.errors.length === 0 && stage5Static.warnings.length === 0
+    ? 'OK  Stage 5 Remote、网络边界、Secret、Storage、隐私、权限、公开入口与架构防回退通过'
+    : `发现 ${stage5Static.errors.length} 个 ERROR / ${stage5Static.warnings.length} 个 WARNING`,
 )
 
 // ------------------------------------------------- 汇总

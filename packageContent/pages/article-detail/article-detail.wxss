@@ -1,0 +1,137 @@
+@import "../../../styles/theme.wxss";
+@import "../../../styles/common.wxss";
+
+page {
+  height: 100vh;
+  overflow: hidden;
+  background: var(--wl-bg);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+}
+
+.page-scroll {
+  flex: 1;
+  height: 0;
+  min-height: 0;
+}
+
+.content {
+  padding: 8rpx var(--wl-page-padding) calc(48rpx + var(--wl-safe-bottom));
+}
+
+.state-card {
+  padding: 40rpx 24rpx;
+  text-align: center;
+}
+
+.loading-indicator {
+  width: 36rpx;
+  height: 36rpx;
+  margin: 0 auto;
+  border: 4rpx solid var(--wl-primary-light);
+  border-top-color: var(--wl-primary);
+  border-radius: 50%;
+  animation: content-detail-spin 0.8s linear infinite;
+}
+
+.state-title {
+  margin-top: 18rpx;
+  color: var(--wl-text-sub);
+  font-size: var(--wl-font-sm);
+}
+
+.retry-button {
+  min-width: 176rpx;
+  min-height: 72rpx;
+  margin-top: 20rpx;
+  padding: 0 28rpx;
+  border-radius: var(--wl-radius-pill);
+  background: var(--wl-primary);
+  color: var(--wl-text-inverse);
+  font-size: var(--wl-font-sm);
+  line-height: 72rpx;
+}
+
+.article-detail {
+  display: block;
+}
+
+.fallback-hint {
+  margin-bottom: var(--wl-card-gap);
+  padding: 14rpx 20rpx;
+  border-radius: var(--wl-radius-sm);
+  background: var(--wl-primary-weak);
+  color: var(--wl-primary-dark);
+  font-size: var(--wl-font-xs);
+  text-align: center;
+}
+
+.article-cover {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: var(--wl-card-gap);
+  border-radius: var(--wl-radius);
+  background: var(--wl-surface-sub);
+}
+
+.article-head {
+  padding: 28rpx 26rpx;
+}
+
+.article-title {
+  color: var(--wl-text);
+  font-size: var(--wl-font-xl);
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 16rpx;
+  color: var(--wl-text-weak);
+  font-size: var(--wl-font-xs);
+  line-height: 1.6;
+}
+
+.article-category {
+  color: var(--wl-primary-dark);
+}
+
+.meta-separator {
+  margin: 0 8rpx;
+}
+
+.article-content {
+  margin-top: var(--wl-card-gap);
+  padding: 30rpx 26rpx;
+  overflow: hidden;
+}
+
+.article-rich-text {
+  display: block;
+  max-width: 100%;
+  color: var(--wl-text);
+  font-size: var(--wl-font);
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.article-rich-text image {
+  max-width: 100%;
+  height: auto;
+}
+
+@keyframes content-detail-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

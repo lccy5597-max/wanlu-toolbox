@@ -59,6 +59,14 @@
         "pages/recent/recent",
         "pages/data-management/data-management"
       ]
+    },
+    {
+      "root": "packageContent",
+      "name": "content",
+      "pages": [
+        "pages/articles/articles",
+        "pages/article-detail/article-detail"
+      ]
     }
   ],
   "preloadRule": {

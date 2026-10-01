@@ -12,7 +12,9 @@
     "test:stage4:discover-integration": "node scripts/test-stage4-discover-integration.js",
     "test:stage4:interaction": "node scripts/test-stage4-interaction.js",
     "test:stage4:static": "node scripts/test-stage4-static-check.js",
-    "test:stage4": "node scripts/test-stage4-tools.js && node scripts/test-stage4-search.js && node scripts/test-stage4-search-integration.js && node scripts/test-stage4-discovery.js && node scripts/test-stage4-discover-integration.js && node scripts/test-stage4-interaction.js"
+    "test:stage4": "node scripts/test-stage4-tools.js && node scripts/test-stage4-search.js && node scripts/test-stage4-search-integration.js && node scripts/test-stage4-discovery.js && node scripts/test-stage4-discover-integration.js && node scripts/test-stage4-interaction.js",
+    "test:stage5:static": "node scripts/test-stage5-static-check.js",
+    "test-stage5": "node scripts/test-stage5-api.js && node scripts/test-stage5-content.js && node scripts/test-stage5-content-page.js && node scripts/test-stage5-content-detail.js && node scripts/test-stage5-content-cache.js && node scripts/test-stage5-github.js && node scripts/test-stage5-github-page.js && node scripts/test-stage5-static-check.js"
   },
   "dependencies": {
     "tdesign-miniprogram": "^1.13.2"
