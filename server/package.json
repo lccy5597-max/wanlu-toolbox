@@ -1,0 +1,23 @@
+{
+  "name": "wanlu-toolbox-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Wanlu Toolbox Stage 6 server skeleton",
+  "scripts": {
+    "dev": "tsx src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "test": "tsx --test tests/server.test.ts tests/static.test.ts tests/wordpress-adapter.test.ts tests/html-sanitizer.test.ts tests/production-content-provider.test.ts",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "sanitize-html": "^2.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.4",
+    "@types/sanitize-html": "^2.16.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
